@@ -1723,3 +1723,44 @@ ul {
         grid-template-columns: 1fr;
     }
 }
+
+/* =========================================
+   MOBILE HEADER — кнопка компактнее
+   ========================================= */
+@media (max-width: 480px) {
+    .header__btn {
+        padding: 8px 10px;
+        font-size: 11px;
+        letter-spacing: 0;
+        white-space: nowrap;
+    }
+
+    .header__actions {
+        gap: 8px;
+    }
+
+    .logo__title {
+        font-size: 13px;
+    }
+
+    .logo__subtitle {
+        font-size: 7px;
+        letter-spacing: 0.8px;
+    }
+
+    .logo__img-icon {
+        width: 34px;
+        height: 34px;
+    }
+
+    .logo {
+        gap: 7px;
+    }
+}
+
+@media (max-width: 360px) {
+    .header__btn {
+        padding: 7px 8px;
+        font-size: 10px;
+    }
+}
