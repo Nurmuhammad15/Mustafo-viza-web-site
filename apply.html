@@ -160,15 +160,18 @@
         .apply-form__file {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
             cursor: pointer;
             border: 1px dashed rgba(255,255,255,0.14);
             border-radius: 12px;
             padding: 12px 16px;
             background: rgba(255,255,255,0.03);
-            transition: all 0.25s ease;
+            transition: border-color 0.25s ease;
             width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
             overflow: hidden;
+            min-height: 0;
         }
         .apply-form__file:hover {
             border-color: rgba(238,169,26,0.4);
@@ -177,25 +180,28 @@
         .apply-form__file-btn {
             background: var(--color-gold);
             color: #06162e;
-            padding: 8px 16px;
+            padding: 8px 12px;
             border-radius: 8px;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 12px;
             white-space: nowrap;
-            flex-shrink: 0;
-            width: 130px;
+            flex: 0 0 110px;
+            width: 110px;
+            min-width: 110px;
+            max-width: 110px;
             text-align: center;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         .apply-form__file-name {
-            font-size: 13px;
+            font-size: 12px;
             color: rgba(255,255,255,0.35);
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            flex: 1;
+            flex: 1 1 0;
             min-width: 0;
+            max-width: 100%;
         }
 
         /* SUBMIT */
