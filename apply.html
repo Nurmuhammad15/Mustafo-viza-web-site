@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подать заявку — Mustafo Viza</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ==============================
+           APPLY PAGE SPECIFIC STYLES
+           ============================== */
+
+        .apply-hero {
+            padding: 120px 0 60px;
+            background: linear-gradient(135deg, #08192f 0%, #06162e 100%);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+        .apply-hero::before {
+            content: '';
+            position: absolute;
+            top: -100px; left: 50%;
+            transform: translateX(-50%);
+            width: 600px; height: 400px;
+            background: radial-gradient(ellipse, rgba(238,169,26,0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .apply-hero__label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            margin-bottom: 12px;
+        }
+        .apply-hero__title {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--color-white);
+            margin-bottom: 14px;
+            letter-spacing: 1px;
+        }
+        .apply-hero__sub {
+            font-size: 15px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* BODY */
+        .apply-body {
+            padding: 60px 0 90px;
+            background: #06162e;
+        }
+
+        .apply-grid {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* CARD */
+        .apply-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 40px;
+        }
+        .apply-card__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            padding-bottom: 22px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+        .apply-card__title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--color-white);
+        }
+        .apply-card__required {
+            font-size: 12px;
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* FORM */
+        .apply-form__row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+        .apply-form__group {
+            margin-bottom: 22px;
+        }
+        .apply-form__row .apply-form__group {
+            margin-bottom: 0;
+        }
+        .apply-form__label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 9px;
+        }
+        .apply-form__input,
+        .apply-form__select,
+        .apply-form__textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: var(--color-white);
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.25s ease;
+            outline: none;
+        }
+        .apply-form__input::placeholder,
+        .apply-form__textarea::placeholder {
+            color: rgba(255,255,255,0.2);
+        }
+        .apply-form__input:hover,
+        .apply-form__select:hover,
+        .apply-form__textarea:hover {
+            border-color: rgba(238,169,26,0.35);
+            background: rgba(255,255,255,0.07);
+        }
+        .apply-form__input:focus,
+        .apply-form__select:focus,
+        .apply-form__textarea:focus {
+            border-color: var(--color-gold);
+            background: rgba(238,169,26,0.05);
+            box-shadow: 0 0 0 3px rgba(238,169,26,0.12);
+        }
+        .apply-form__select {
+            appearance: none;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.35)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            padding-right: 44px;
+        }
+        .apply-form__select option {
+            background: #0d2240;
+            color: #fff;
+        }
+        .apply-form__textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        /* FILE */
+        .apply-form__file {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            border: 1px dashed rgba(255,255,255,0.14);
+            border-radius: 12px;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.03);
+            transition: all 0.25s ease;
+        }
+        .apply-form__file:hover {
+            border-color: rgba(238,169,26,0.4);
+            background: rgba(238,169,26,0.04);
+        }
+        .apply-form__file-btn {
+            background: var(--color-gold);
+            color: #06162e;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .apply-form__file-name {
+            font-size: 13px;
+            color: rgba(255,255,255,0.35);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* SUBMIT */
+        .apply-submit {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--color-gold) 0%, #c8880a 100%);
+            border: none;
+            border-radius: 14px;
+            color: #06162e;
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        .apply-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 36px rgba(238,169,26,0.35);
+        }
+        .apply-submit:active {
+            transform: translateY(0);
+        }
+
+        /* SUCCESS STATE */
+        .apply-submit.submitted {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            pointer-events: none;
+        }
+
+        /* SIDEBAR */
+        .apply-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: sticky;
+            top: 90px;
+        }
+        .apply-sidebar__card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 28px;
+        }
+        .apply-sidebar__card--gold {
+            background: rgba(238,169,26,0.04);
+            border-color: rgba(238,169,26,0.18);
+        }
+        .apply-sidebar__title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        /* VISA LIST */
+        .apply-visa-list { display: flex; flex-direction: column; gap: 12px; }
+        .apply-visa-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 14px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+        .apply-visa-item:hover {
+            border-color: rgba(238,169,26,0.25);
+            background: rgba(238,169,26,0.05);
+        }
+        .apply-visa-flag { font-size: 22px; flex-shrink: 0; }
+        .apply-visa-name { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+        .apply-visa-desc { font-size: 11px; color: rgba(255,255,255,0.4); }
+
+        /* CONTACTS */
+        .apply-contacts { display: flex; flex-direction: column; gap: 13px; }
+        .apply-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .apply-contact-item:hover { color: #fff; }
+        .apply-contact-item--tg { color: rgba(255,255,255,0.65); }
+        .apply-contact-item--tg:hover { color: #29b6f6; }
+        .apply-contact-icon { font-size: 14px; color: var(--color-gold); flex-shrink: 0; }
+
+        /* ALERT */
+        .apply-alert {
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 28px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .apply-alert--success {
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.25);
+            color: #4ade80;
+        }
+        .apply-alert--error {
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.25);
+            color: #f87171;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 960px) {
+            .apply-grid { grid-template-columns: 1fr; }
+            .apply-sidebar { position: static; }
+            .apply-hero__title { font-size: 30px; }
+        }
+        @media (max-width: 560px) {
+            .apply-form__row { grid-template-columns: 1fr; }
+            .apply-card { padding: 24px 18px; }
+            .apply-hero { padding: 100px 0 44px; }
+            .apply-hero__title { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MORPH OVERLAY (для перехода) -->
+    <div class="morph-overlay" id="morph-overlay">
+        <div class="morph-overlay__img" id="morph-overlay-img"></div>
+    </div>
+
+    <!-- HEADER — точная копия с index.html -->
+    <header class="header header--scrolled">
+        <div class="container header__container">
+            <a href="index.html" class="logo">
+                <div class="logo__img">
+                    <span class="logo__cube"></span>
+                </div>
+                <div class="logo__text">
+                    <span class="logo__title">MUSTAFO VIZA</span>
+                    <span class="logo__subtitle">РАБОТА БЕЗ ГРАНИЦ</span>
+                </div>
+            </a>
+
+            <nav class="nav" id="nav-menu">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Главная</a></li>
+
+                    <li class="nav__item dropdown">
+                        <a href="#" class="nav__link" id="services-toggle">
+                            Услуги <i class="fa-solid fa-chevron-down drop-icon"></i>
+                        </a>
+                        <div class="dropdown__menu" id="services-dropdown">
+                            <a href="#" class="dropdown__item">Туристические визы</a>
+                            <a href="#" class="dropdown__item">Деловые визы</a>
+                            <a href="#" class="dropdown__item">Рабочие визы</a>
+                            <a href="#" class="dropdown__item">Студенческие визы</a>
+                            <a href="#" class="dropdown__item">Срочные визы</a>
+                        </div>
+                    </li>
+
+                    <li class="nav__item dropdown">
+                        <a href="#" class="nav__link" id="countries-toggle">
+                            Страны <i class="fa-solid fa-chevron-down drop-icon"></i>
+                        </a>
+                        <div class="dropdown__menu dropdown__menu--countries" id="countries-dropdown">
+                            <a href="lithuania.html" class="dropdown__item"><span class="dropdown__code">LT</span> Литва</a>
+                            <a href="latvia.html" class="dropdown__item"><span class="dropdown__code">LV</span> Латвия</a>
+                            <a href="bulgaria.html" class="dropdown__item"><span class="dropdown__code">BG</span> Болгария</a>
+                            <a href="croatia.html" class="dropdown__item"><span class="dropdown__code">HR</span> Хорватия</a>
+                            <a href="poland.html" class="dropdown__item"><span class="dropdown__code">PL</span> Польша</a>
+                        </div>
+                    </li>
+
+                    <li><a href="index.html#about" class="nav__link">О нас</a></li>
+                    <li><a href="index.html#blog" class="nav__link">Блог</a></li>
+                    <li><a href="#footer" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <div class="header__actions">
+                <a href="tel:+998951240599" class="header__phone">
+                    <i class="fa-solid fa-phone phone-icon"></i> +998 95 124 05 99
+                </a>
+                <a href="#" class="btn btn--primary header__btn">Консультация</a>
+                <button class="burger-menu" id="burger-btn" aria-label="Открыть меню">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="apply-hero">
+        <div class="container">
+            <p class="apply-hero__label">Оформление визы</p>
+            <h1 class="apply-hero__title">Подать заявку</h1>
+            <p class="apply-hero__sub">Заполните форму — мы свяжемся с вами в течение часа</p>
+        </div>
+    </section>
+
+    <!-- APPLY BODY -->
+    <section class="apply-body">
+        <div class="container">
+
+            <!-- ALERT (скрыт по умолчанию, появится после отправки) -->
+            <div class="apply-alert apply-alert--success" id="apply-success-msg" style="display:none;">
+                ✅ Ваша заявка отправлена! Мы свяжемся с вами в ближайшее время.
+            </div>
+
+            <div class="apply-grid">
+
+                <!-- ФОРМА -->
+                <div class="apply-card">
+                    <div class="apply-card__header">
+                        <h2 class="apply-card__title">📋 Анкета</h2>
+                        <span class="apply-card__required">* Все поля обязательны</span>
+                    </div>
+
+                    <form class="apply-form" id="apply-form" novalidate>
+
+                        <div class="apply-form__row">
+                            <div class="apply-form__group">
+                                <label class="apply-form__label">Имя *</label>
+                                <input type="text" name="first_name" class="apply-form__input" placeholder="Введите ваше имя" required>
+                            </div>
+                            <div class="apply-form__group">
+                                <label class="apply-form__label">Фамилия *</label>
+                                <input type="text" name="last_name" class="apply-form__input" placeholder="Введите вашу фамилию" required>
+                            </div>
+                        </div>
+
+                        <div class="apply-form__row">
+                            <div class="apply-form__group">
+                                <label class="apply-form__label">📞 Телефон *</label>
+                                <input type="tel" name="phone" class="apply-form__input" placeholder="+998 XX XXX XX XX" required>
+                            </div>
+                            <div class="apply-form__group">
+                                <label class="apply-form__label">Фото паспорта</label>
+                                <label class="apply-form__file" id="file-label">
+                                    <span class="apply-form__file-btn" id="file-btn">📎 Выбрать файл</span>
+                                    <span class="apply-form__file-name" id="file-name">Файл не выбран</span>
+                                    <input type="file" name="passport" id="passport-input" accept="image/*" style="display:none;" onchange="handleFileChange(this)">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="apply-form__group">
+                            <label class="apply-form__label">🌍 Страна назначения *</label>
+                            <select name="country" class="apply-form__select" required>
+                                <option value="">— Выберите страну —</option>
+                                <option value="lt">🇱🇹 Литва</option>
+                                <option value="lv">🇱🇻 Латвия</option>
+                                <option value="bg">🇧🇬 Болгария</option>
+                                <option value="hr">🇭🇷 Хорватия</option>
+                                <option value="pl">🇵🇱 Польша</option>
+                                <option value="other">Другая страна</option>
+                            </select>
+                        </div>
+
+                        <div class="apply-form__group">
+                            <label class="apply-form__label">🎫 Тип визы *</label>
+                            <select name="visa_type" class="apply-form__select" required>
+                                <option value="">— Выберите тип визы —</option>
+                                <option value="tourist">Туристическая</option>
+                                <option value="work">Рабочая</option>
+                                <option value="student">Студенческая</option>
+                                <option value="business">Деловая</option>
+                                <option value="urgent">Срочная</option>
+                            </select>
+                        </div>
+
+                        <div class="apply-form__group">
+                            <label class="apply-form__label">💬 Описание и пожелания</label>
+                            <textarea name="description" class="apply-form__textarea"
+                                placeholder="Расскажите о своей ситуации, цели поездки, сроках..."></textarea>
+                        </div>
+
+                        <button type="submit" class="apply-submit" id="apply-submit-btn">
+                            🚀 Отправить заявку
+                        </button>
+
+                    </form>
+                </div>
+
+                <!-- САЙДБАР -->
+                <div class="apply-sidebar">
+
+                    <div class="apply-sidebar__card">
+                        <h3 class="apply-sidebar__title">🌍 Популярные направления</h3>
+                        <div class="apply-visa-list">
+                            <a href="lithuania.html" class="apply-visa-item" style="text-decoration:none;">
+                                <span class="apply-visa-flag">🇱🇹</span>
+                                <div>
+                                    <div class="apply-visa-name">Литва</div>
+                                    <div class="apply-visa-desc">Рабочая, туристическая · Шенген</div>
+                                </div>
+                            </a>
+                            <a href="latvia.html" class="apply-visa-item" style="text-decoration:none;">
+                                <span class="apply-visa-flag">🇱🇻</span>
+                                <div>
+                                    <div class="apply-visa-name">Латвия</div>
+                                    <div class="apply-visa-desc">Рабочая, туристическая · Шенген</div>
+                                </div>
+                            </a>
+                            <a href="bulgaria.html" class="apply-visa-item" style="text-decoration:none;">
+                                <span class="apply-visa-flag">🇧🇬</span>
+                                <div>
+                                    <div class="apply-visa-name">Болгария</div>
+                                    <div class="apply-visa-desc">Туристическая, деловая</div>
+                                </div>
+                            </a>
+                            <a href="croatia.html" class="apply-visa-item" style="text-decoration:none;">
+                                <span class="apply-visa-flag">🇭🇷</span>
+                                <div>
+                                    <div class="apply-visa-name">Хорватия</div>
+                                    <div class="apply-visa-desc">Туристическая · Шенген</div>
+                                </div>
+                            </a>
+                            <a href="poland.html" class="apply-visa-item" style="text-decoration:none;">
+                                <span class="apply-visa-flag">🇵🇱</span>
+                                <div>
+                                    <div class="apply-visa-name">Польша</div>
+                                    <div class="apply-visa-desc">Все типы виз · Шенген</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="apply-sidebar__card apply-sidebar__card--gold">
+                        <h3 class="apply-sidebar__title">📞 Контакты</h3>
+                        <div class="apply-contacts">
+                            <a href="tel:+998951240599" class="apply-contact-item">
+                                <i class="fa-solid fa-phone apply-contact-icon"></i> +998 95 124 05 99
+                            </a>
+                            <a href="tel:+998889000599" class="apply-contact-item">
+                                <i class="fa-solid fa-phone apply-contact-icon"></i> +998 88 900 05 99
+                            </a>
+                            <a href="https://t.me/mustafovizauz" target="_blank" class="apply-contact-item apply-contact-item--tg">
+                                <i class="fa-brands fa-telegram apply-contact-icon"></i> @mustafovizauz
+                            </a>
+                            <div class="apply-contact-item">
+                                <i class="fa-solid fa-location-dot apply-contact-icon"></i> г. Ташкент, ул. Амира Темура, 123
+                            </div>
+                            <div class="apply-contact-item">
+                                <i class="fa-regular fa-clock apply-contact-icon"></i> Пн–Пт, 9:00–18:00
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER — точная копия с index.html -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__col">
+                    <div class="logo footer__logo">
+                        <div class="logo__cube"></div>
+                        <div class="logo__text">
+                            <span class="logo__title">MUSTAFO VIZA</span>
+                            <span class="logo__subtitle">РАБОТА БЕЗ ГРАНИЦ</span>
+                        </div>
+                    </div>
+                    <p class="footer__text">Ваш надежный партнер в мире виз. Мы делаем путешествия доступными!</p>
+                    <div class="footer__socials">
+                        <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer__col">
+                    <h4 class="footer__title">КОНТАКТЫ</h4>
+                    <ul class="footer__contacts">
+                        <li><i class="fa-solid fa-phone phone-icon"></i> <a href="tel:+998951240599">+998 95 124 05 99</a></li>
+                        <li><i class="fa-solid fa-phone phone-icon"></i> <a href="tel:+998889000599">+998 88 900 05 99</a></li>
+                        <li><i class="fa-solid fa-envelope phone-icon"></i> <a href="mailto:info@mustafe-viza.uz">info@mustafe-viza.uz</a></li>
+                        <li><i class="fa-solid fa-location-dot phone-icon"></i> <span>г. Ташкент, ул. Амира Темура, 123</span></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4 class="footer__title">ПОЛЕЗНЫЕ ССЫЛКИ</h4>
+                    <ul class="footer__links">
+                        <li><a href="index.html#services">Виды виз</a></li>
+                        <li><a href="index.html#about">Документы</a></li>
+                        <li><a href="index.html#blog">Вопросы и ответы</a></li>
+                        <li><a href="index.html#blog">Блог</a></li>
+                        <li><a href="#">Политика конфиденциальности</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4 class="footer__title">ПОДПИСКА НА НОВОСТИ</h4>
+                    <p class="footer__text footer__text--subscribe">Получайте новости и актуальные предложения первыми.</p>
+                    <form class="footer__form">
+                        <input type="email" placeholder="Ваш e-mail" required class="footer__input">
+                        <button type="submit" class="btn btn--primary footer__btn">ПОДПИСАТЬСЯ</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2024 Mustafe Viza. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const TG_TOKEN = '8342368418:AAHGPeuT7QKVQPr_2643DqyRpxQk_ELFgSY';
+        const TG_CHAT  = '-1003603994879';
+
+        // Файл input — меняем кнопку после выбора
+        function handleFileChange(input) {
+            const btn  = document.getElementById('file-btn');
+            const name = document.getElementById('file-name');
+            if (input.files[0]) {
+                name.textContent = input.files[0].name;
+                btn.textContent  = '✅ Загружено';
+                btn.style.background = '#22c55e';
+                btn.style.color = '#fff';
+            } else {
+                name.textContent = 'Файл не выбран';
+                btn.textContent  = '📎 Выбрать файл';
+                btn.style.background = '';
+                btn.style.color = '';
+            }
+        }
+
+        // Отправка формы
+        document.getElementById('apply-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const btn        = document.getElementById('apply-submit-btn');
+            const successMsg = document.getElementById('apply-success-msg');
+
+            // Валидация
+            const inputs = this.querySelectorAll('[required]');
+            let valid = true;
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = '#f87171';
+                    input.style.boxShadow   = '0 0 0 3px rgba(248,113,113,0.15)';
+                    valid = false;
+                    setTimeout(() => {
+                        input.style.borderColor = '';
+                        input.style.boxShadow   = '';
+                    }, 2500);
+                }
+            });
+            if (!valid) return;
+
+            // Кнопка — загрузка
+            btn.textContent      = '⏳ Отправляем...';
+            btn.style.opacity    = '0.75';
+            btn.style.pointerEvents = 'none';
+
+            // Собираем данные
+            const firstName = this.first_name.value.trim();
+            const lastName  = this.last_name.value.trim();
+            const phone     = this.phone.value.trim();
+            const country   = this.country.options[this.country.selectedIndex].text;
+            const visaType  = this.visa_type.options[this.visa_type.selectedIndex].text;
+            const desc      = this.description.value.trim() || '—';
+            const fileInput = document.getElementById('passport-input');
+            const hasFile   = fileInput.files[0];
+
+            const message = 
+`🆕 <b>Новая заявка на визу</b>
+
+👤 <b>Имя:</b> ${firstName} ${lastName}
+📞 <b>Телефон:</b> ${phone}
+🌍 <b>Страна:</b> ${country}
+🎫 <b>Тип визы:</b> ${visaType}
+💬 <b>Описание:</b> ${desc}
+📎 <b>Паспорт:</b> ${hasFile ? '✅ прикреплён' : '❌ не прикреплён'}`;
+
+            try {
+                // Отправляем текст
+                await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TG_CHAT,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+
+                // Если есть фото — отправляем отдельно
+                if (hasFile) {
+                    const fd = new FormData();
+                    fd.append('chat_id', TG_CHAT);
+                    fd.append('photo', fileInput.files[0]);
+                    fd.append('caption', `📎 Паспорт: ${firstName} ${lastName} (${phone})`);
+                    await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendPhoto`, {
+                        method: 'POST',
+                        body: fd
+                    });
+                }
+
+                // Успех
+                btn.textContent  = '✅ Заявка отправлена!';
+                btn.classList.add('submitted');
+                btn.style.opacity = '1';
+                successMsg.style.display = 'flex';
+                successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                // Сброс через 5 сек
+                setTimeout(() => {
+                    this.reset();
+                    document.getElementById('file-name').textContent = 'Файл не выбран';
+                    const fileBtn = document.getElementById('file-btn');
+                    fileBtn.textContent  = '📎 Выбрать файл';
+                    fileBtn.style.background = '';
+                    fileBtn.style.color = '';
+                    btn.textContent = '🚀 Отправить заявку';
+                    btn.classList.remove('submitted');
+                    btn.style.pointerEvents = '';
+                    setTimeout(() => { successMsg.style.display = 'none'; }, 400);
+                }, 5000);
+
+            } catch (err) {
+                btn.textContent     = '❌ Ошибка. Попробуйте снова';
+                btn.style.background = '#ef4444';
+                btn.style.opacity   = '1';
+                btn.style.pointerEvents = '';
+                setTimeout(() => {
+                    btn.textContent = '🚀 Отправить заявку';
+                    btn.style.background = '';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

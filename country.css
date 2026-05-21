@@ -1,0 +1,320 @@
+/* =========================================
+   COUNTRY PAGE — Morph Entry Animation
+   ========================================= */
+.morph-entry {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-size: cover;
+    background-position: center;
+    z-index: 9999;
+    pointer-events: none;
+    animation: morph-entry-out 0.65s cubic-bezier(0.7, 0, 0.2, 1) 0.05s forwards;
+}
+
+@keyframes morph-entry-out {
+    0%   { opacity: 1; transform: scale(1); }
+    70%  { opacity: 1; transform: scale(1.04); }
+    100% { opacity: 0; transform: scale(1.08); pointer-events: none; }
+}
+
+.country-page-body {
+    background-color: #06162e;
+    overflow-x: hidden;
+}
+
+/* BACK BUTTON */
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.8);
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+.back-btn:hover { color: #eea91a; }
+
+/* =========================================
+   COUNTRY HERO
+   ========================================= */
+.country-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.country-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(6,22,46,0.5) 0%,
+        rgba(6,22,46,0.75) 60%,
+        rgba(6,22,46,1) 100%
+    );
+}
+
+.country-hero__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    animation: fadeInUp 0.8s ease 0.5s both;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.country-hero__flag {
+    font-size: 72px;
+    margin-bottom: 16px;
+    display: block;
+    filter: drop-shadow(0 4px 24px rgba(0,0,0,0.4));
+    animation: flagPop 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.6s both;
+}
+
+@keyframes flagPop {
+    from { transform: scale(0.4); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+.country-hero__label {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 8px;
+}
+
+.country-hero__title {
+    font-size: clamp(56px, 10vw, 100px);
+    font-weight: 800;
+    letter-spacing: 6px;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 16px;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+
+.country-hero__descr {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 32px;
+    letter-spacing: 1px;
+}
+
+.country-hero__badges {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    backdrop-filter: blur(8px);
+    animation: fadeInUp 0.6s ease both;
+}
+.badge:nth-child(1) { animation-delay: 0.8s; }
+.badge:nth-child(2) { animation-delay: 0.95s; }
+.badge:nth-child(3) { animation-delay: 1.1s; }
+
+.badge i { color: #eea91a; }
+
+.country-hero__scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.4);
+    font-size: 20px;
+    animation: bounce 2s infinite;
+    z-index: 2;
+}
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+/* =========================================
+   VISA TYPES GRID
+   ========================================= */
+.visa-types {
+    padding: 90px 0;
+    background-color: #06162e;
+}
+
+.visa-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.visa-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 32px 24px;
+    transition: all 0.35s ease;
+    animation: fadeInUp 0.6s ease var(--delay, 0s) both;
+    cursor: default;
+}
+
+.visa-card:hover {
+    background: rgba(238,169,26,0.07);
+    border-color: rgba(238,169,26,0.3);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.visa-card__icon {
+    width: 52px; height: 52px;
+    border-radius: 12px;
+    background: rgba(238,169,26,0.1);
+    border: 1px solid rgba(238,169,26,0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: #eea91a;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.visa-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.visa-card p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.visa-card__price {
+    font-size: 18px;
+    font-weight: 800;
+    color: #eea91a;
+}
+
+/* =========================================
+   DOCUMENTS SECTION
+   ========================================= */
+.docs-section {
+    padding: 90px 0;
+    background: #08192f;
+}
+
+.docs-section__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.docs-section__text h2 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    color: #fff;
+}
+
+.docs-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.docs-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+}
+
+.docs-list li i {
+    color: #eea91a;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.docs-section__img {
+    height: 420px;
+    border-radius: 16px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+}
+
+/* =========================================
+   CTA SECTION
+   ========================================= */
+.country-cta {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #0a1f3a 0%, #06162e 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.country-cta::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(238,169,26,0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.country-cta__inner { position: relative; z-index: 1; }
+
+.country-cta h2 {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: #fff;
+}
+
+.country-cta p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 36px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .visa-grid { grid-template-columns: repeat(2, 1fr); }
+    .docs-section__grid { grid-template-columns: 1fr; }
+    .docs-section__img { height: 260px; }
+}
+@media (max-width: 500px) {
+    .visa-grid { grid-template-columns: 1fr; }
+    .country-hero__title { font-size: 48px; }
+}
