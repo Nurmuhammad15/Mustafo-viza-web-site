@@ -1814,3 +1814,38 @@ ul {
     /* Hide consult button in header__actions on mobile — it's in nav now */
     .header__btn { display: none !important; }
 }
+
+/* Workflow arrow — вниз на мобильных */
+@media (max-width: 1024px) {
+    .workflow-step__arrow {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 16px auto 0;
+        width: fit-content;
+        gap: 0;
+    }
+
+    .workflow-step__arrow::before {
+        width: 1px;
+        height: 24px;
+        border-top: none;
+        border-left: 1px dashed rgba(255,255,255,0.2);
+    }
+
+    .workflow-step__arrow::after {
+        width: 7px;
+        height: 7px;
+        border-top: none;
+        border-right: none;
+        border-bottom: 2px solid rgba(255,255,255,0.35);
+        border-right: 2px solid rgba(255,255,255,0.35);
+        transform: rotate(45deg) translateY(-3px);
+    }
+
+    /* Скрываем стрелку у последнего шага */
+    .workflow-step:last-child .workflow-step__arrow {
+        display: none;
+    }
+}
