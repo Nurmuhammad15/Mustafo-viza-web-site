@@ -560,7 +560,7 @@
                             </div>
                         </div>
 
-                        <div class="apply-form__group">
+                        <div class="apply-form__group" id="country-field">
                             <label class="apply-form__label">🌍 Страна назначения *</label>
                             <select name="country" class="apply-form__select" required>
                                 <option value="">— Выберите страну —</option>
@@ -726,9 +726,15 @@
         (function() {
             const params = new URLSearchParams(window.location.search);
             const c = params.get('country');
-            if (c) {
-                const sel = document.querySelector('select[name="country"]');
-                if (sel) sel.value = c;
+            const field = document.getElementById('country-field');
+            const sel = document.querySelector('select[name="country"]');
+            if (c && sel) {
+                sel.value = c;
+                // Скрываем поле — страна уже известна
+                if (field) {
+                    field.style.display = 'none';
+                    sel.removeAttribute('required'); // не мешать валидации
+                }
             }
         })();
 
