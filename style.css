@@ -114,13 +114,12 @@ ul {
     gap: 10px;
 }
 
-.logo__cube {
+.logo__img-icon {
     display: block;
-    width: 32px;
-    height: 32px;
-    background-color: var(--color-gold);
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    /* Фейковый кубик, как на макете */
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
 .logo__text {
