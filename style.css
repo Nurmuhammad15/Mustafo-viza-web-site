@@ -746,32 +746,7 @@ ul {
 }
 
 /* Базовое позиционирование для линий и наконечников */
-.workflow-step:not(:last-child)::after,
-.workflow-step:not(:last-child)::before {
-    content: '';
-    position: absolute;
-    top: 30px; /* Центрируем по вертикали относительно иконки (высота иконки 60px / 2) */
-}
-
-/* Тонкая пунктирная линия, идущая вправо */
-.workflow-step:not(:last-child)::after {
-    right: -35%; /* Сдвигаем в промежуток между карточками */
-    width: 70%;  /* Задаем длину линии, перекрывающую зазор */
-    height: 1px;
-    border-top: 1px dashed rgba(255, 255, 255, 0.2);
-    z-index: 1;
-}
-
-/* Аккуратная стрелка строго на правом конце линии */
-.workflow-step:not(:last-child)::before {
-    right: -35%; /* Сажаем ровно на правый край созданного пунктира */
-    width: 6px;
-    height: 6px;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    border-right: 1px solid rgba(255, 255, 255, 0.3);
-    transform: translateY(-50%) rotate(45deg); /* Поворачиваем квадрат для создания наконечника */
-    z-index: 2;
-}
+/* old workflow arrows removed */
 
 .workflow-step__badge {
     position: absolute;
@@ -1583,16 +1558,33 @@ ul {
     align-items: center;
 }
 
-.workflow-step:not(:last-child)::after {
-    content: '\f054';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
+.workflow-step__arrow {
     position: absolute;
     top: 28px;
-    right: -18px;
-    font-size: 14px;
-    color: rgba(255,255,255,0.25);
+    right: -22px;
+    display: flex;
+    align-items: center;
+    gap: 0;
     z-index: 2;
+    pointer-events: none;
+}
+
+.workflow-step__arrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    border-top: 1px dashed rgba(255,255,255,0.2);
+}
+
+.workflow-step__arrow::after {
+    content: '';
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid rgba(255,255,255,0.35);
+    border-right: 2px solid rgba(255,255,255,0.35);
+    transform: rotate(45deg) translateX(-2px);
 }
 
 /* =========================================
