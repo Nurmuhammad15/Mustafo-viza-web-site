@@ -327,11 +327,113 @@
             .apply-sidebar { position: static; }
             .apply-hero__title { font-size: 30px; }
         }
-        @media (max-width: 560px) {
-            .apply-form__row { grid-template-columns: 1fr; }
-            .apply-card { padding: 24px 18px; }
-            .apply-hero { padding: 100px 0 44px; }
-            .apply-hero__title { font-size: 24px; }
+
+        @media (max-width: 768px) {
+            .apply-hero {
+                padding: 90px 0 36px;
+            }
+            .apply-hero__label {
+                font-size: 11px;
+                letter-spacing: 2px;
+            }
+            .apply-hero__title {
+                font-size: 26px;
+            }
+            .apply-hero__sub {
+                font-size: 13px;
+            }
+            .apply-body {
+                padding: 30px 0 60px;
+            }
+            .apply-grid {
+                gap: 20px;
+            }
+            .apply-card {
+                padding: 22px 16px;
+                border-radius: 16px;
+            }
+            .apply-card__title {
+                font-size: 17px;
+            }
+            .apply-form__row {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .apply-form__group {
+                margin-bottom: 16px;
+            }
+            .apply-form__input,
+            .apply-form__select,
+            .apply-form__textarea {
+                padding: 13px 14px;
+                font-size: 14px;
+                border-radius: 10px;
+            }
+            .apply-form__label {
+                font-size: 11px;
+                margin-bottom: 7px;
+            }
+            .apply-form__textarea {
+                min-height: 110px;
+            }
+            .apply-form__file {
+                padding: 10px 12px;
+            }
+            .apply-form__file-btn {
+                flex: 0 0 90px;
+                width: 90px;
+                min-width: 90px;
+                max-width: 90px;
+                font-size: 11px;
+                padding: 7px 8px;
+            }
+            .apply-submit {
+                padding: 16px;
+                font-size: 14px;
+                border-radius: 12px;
+            }
+            .apply-sidebar {
+                gap: 14px;
+            }
+            .apply-sidebar__card {
+                padding: 20px 16px;
+                border-radius: 16px;
+            }
+            .apply-sidebar__title {
+                font-size: 13px;
+                margin-bottom: 14px;
+            }
+            .apply-visa-item {
+                padding: 10px 12px;
+                gap: 10px;
+            }
+            .apply-visa-flag {
+                font-size: 20px;
+            }
+            .apply-visa-name {
+                font-size: 12px;
+            }
+            .apply-visa-desc {
+                font-size: 10px;
+            }
+            .apply-contact-item {
+                font-size: 12px;
+            }
+            .apply-card__header {
+                margin-bottom: 22px;
+                padding-bottom: 16px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .apply-hero__title { font-size: 22px; }
+            .apply-card { padding: 18px 12px; }
+            .apply-form__input,
+            .apply-form__select,
+            .apply-form__textarea {
+                font-size: 13px;
+                padding: 12px 12px;
+            }
         }
     </style>
 </head>
@@ -620,6 +722,16 @@
 
     <script src="script.js"></script>
     <script>
+        // Авто-выбор страны из URL ?country=lt
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            const c = params.get('country');
+            if (c) {
+                const sel = document.querySelector('select[name="country"]');
+                if (sel) sel.value = c;
+            }
+        })();
+
         const TG_TOKEN = '8342368418:AAHGPeuT7QKVQPr_2643DqyRpxQk_ELFgSY';
         const TG_CHAT  = '-1003603994879';
 

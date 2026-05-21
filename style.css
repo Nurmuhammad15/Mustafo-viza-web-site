@@ -1218,6 +1218,10 @@ ul {
         display: none;
     }
 
+    .header__btn {
+        display: none;
+    }
+
     .burger-menu {
         display: flex;
     }
@@ -1728,13 +1732,6 @@ ul {
    MOBILE HEADER — кнопка компактнее
    ========================================= */
 @media (max-width: 480px) {
-    .header__btn {
-        padding: 8px 10px;
-        font-size: 11px;
-        letter-spacing: 0;
-        white-space: nowrap;
-    }
-
     .header__actions {
         gap: 8px;
     }
@@ -1759,8 +1756,4 @@ ul {
 }
 
 @media (max-width: 360px) {
-    .header__btn {
-        padding: 7px 8px;
-        font-size: 10px;
-    }
 }
