@@ -164,14 +164,16 @@
             cursor: pointer;
             border: 1px dashed rgba(255,255,255,0.14);
             border-radius: 12px;
-            padding: 12px 16px;
+            padding: 0 16px;
             background: rgba(255,255,255,0.03);
             transition: border-color 0.25s ease;
             width: 100%;
             max-width: 100%;
             box-sizing: border-box;
             overflow: hidden;
-            min-height: 0;
+            height: 46px;
+            min-height: 46px;
+            max-height: 46px;
         }
         .apply-form__file:hover {
             border-color: rgba(238,169,26,0.4);
@@ -490,6 +492,9 @@
                     <li><a href="index.html#about" class="nav__link">О нас</a></li>
                     <li><a href="index.html#blog" class="nav__link">Блог</a></li>
                     <li><a href="#footer" class="nav__link">Контакты</a></li>
+                    <li class="nav__consult-item">
+                        <a href="apply.html" class="btn btn--primary nav__consult-btn">Консультация</a>
+                    </li>
                 </ul>
             </nav>
 
@@ -552,7 +557,7 @@
                             </div>
                             <div class="apply-form__group">
                                 <label class="apply-form__label">Фото паспорта</label>
-                                <label class="apply-form__file" id="file-label">
+                                <label class="apply-form__file" id="file-label" style="height:46px;">
                                     <span class="apply-form__file-btn" id="file-btn">📎 Выбрать файл</span>
                                     <span class="apply-form__file-name" id="file-name">Файл не выбран</span>
                                     <input type="file" name="passport" id="passport-input" accept="image/*" style="display:none;" onchange="handleFileChange(this)">
@@ -745,16 +750,18 @@
         function handleFileChange(input) {
             const btn  = document.getElementById('file-btn');
             const name = document.getElementById('file-name');
+            const label = document.getElementById('file-label');
             if (input.files[0]) {
-                name.textContent = input.files[0].name;
-                btn.textContent  = '✅ Загружено';
-                btn.style.background = '#22c55e';
-                btn.style.color = '#fff';
+                // Truncate filename to max 20 chars
+                let fname = input.files[0].name;
+                if (fname.length > 20) fname = fname.substring(0, 17) + '...';
+                name.textContent = fname;
+                btn.innerHTML = '✅ Загружено';
+                btn.style.cssText = 'background:#22c55e;color:#fff;flex:0 0 110px;width:110px;min-width:110px;max-width:110px;';
             } else {
                 name.textContent = 'Файл не выбран';
-                btn.textContent  = '📎 Выбрать файл';
-                btn.style.background = '';
-                btn.style.color = '';
+                btn.innerHTML = '📎 Выбрать файл';
+                btn.style.cssText = 'flex:0 0 110px;width:110px;min-width:110px;max-width:110px;';
             }
         }
 

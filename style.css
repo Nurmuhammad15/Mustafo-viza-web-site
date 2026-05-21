@@ -411,31 +411,6 @@ ul {
 
 /* АДАПТИВНОСТЬ (МЕДИА-ЗАПРОСЫ) */
 @media (max-width: 1024px) {
-    .nav {
-        position: fixed;
-        top: -100%;
-        left: 0;
-        width: 100%;
-        background-color: var(--color-dark-blue);
-        padding: 40px 0;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        transition: top 0.4s ease;
-    }
-    
-    .nav.active {
-        top: 70px;
-    }
-    
-    .nav__list {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-    
-    .burger-menu {
-        display: flex;
-    }
-    
     .stats-bar__grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 30px;
@@ -1756,4 +1731,86 @@ ul {
 }
 
 @media (max-width: 360px) {
+}
+
+/* =========================================
+   NAV — кнопка Консультация внизу мобильного меню
+   ========================================= */
+.nav__consult-item {
+    display: none;
+    width: 100%;
+    padding: 20px 0 10px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    margin-top: 10px;
+}
+
+.nav__consult-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+@media (max-width: 1024px) {
+    .nav__consult-item {
+        display: block;
+    }
+}
+
+
+
+/* =========================================
+   DESKTOP — nav always visible, burger hidden
+   ========================================= */
+@media (min-width: 1025px) {
+    .burger-menu { display: none !important; }
+
+    .nav {
+        position: static !important;
+        transform: none !important;
+        height: auto !important;
+        background: transparent !important;
+        backdrop-filter: none !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        z-index: auto !important;
+        display: block !important;
+    }
+
+    .nav__list {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 24px !important;
+    }
+
+    /* Hide consult button inside nav on desktop — it's in header__actions */
+    .nav__consult-item { display: none !important; }
+}
+
+/* =========================================
+   MOBILE NAV — кнопка Консультация внизу
+   ========================================= */
+@media (max-width: 1024px) {
+    .nav__consult-item {
+        display: block !important;
+        width: 100%;
+        padding: 20px 0 10px;
+        margin-top: 10px;
+        border-top: 1px solid rgba(255,255,255,0.07);
+        border-bottom: none !important;
+    }
+
+    .nav__consult-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 14px 20px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+
+    /* Hide consult button in header__actions on mobile — it's in nav now */
+    .header__btn { display: none !important; }
 }
