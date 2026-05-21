@@ -116,6 +116,9 @@
             </div>
         </div>
 
+    </section>
+
+    <div class="stats-bar-wrapper">
         <div class="stats-bar">
             <div class="container stats-bar__grid">
                 <div class="stat-card">
@@ -147,7 +150,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <main class="main-content">
 
@@ -225,9 +228,7 @@
 
                 <div class="services__grid">
                     <div class="service-item">
-                        <div class="service-item__icon">
-                            <i class="fa-solid fa-passport"></i>
-                        </div>
+                        <div class="service-item__icon"><i class="fa-solid fa-passport"></i></div>
                         <div class="service-item__info">
                             <h3 class="service-item__title">ТУРЦИЯ</h3>
                             <p class="service-item__descr">Оформление туристических виз в любую страну мира.</p>
@@ -235,9 +236,7 @@
                     </div>
 
                     <div class="service-item">
-                        <div class="service-item__icon">
-                            <i class="fa-regular fa-comments"></i>
-                        </div>
+                        <div class="service-item__icon"><i class="fa-regular fa-comments"></i></div>
                         <div class="service-item__info">
                             <h3 class="service-item__title">ГОСТЕВЫЕ ВИЗЫ</h3>
                             <p class="service-item__descr">Приглашения для посещения родственников и друзей.</p>
@@ -245,9 +244,7 @@
                     </div>
 
                     <div class="service-item">
-                        <div class="service-item__icon">
-                            <i class="fa-solid fa-briefcase"></i>
-                        </div>
+                        <div class="service-item__icon"><i class="fa-solid fa-briefcase"></i></div>
                         <div class="service-item__info">
                             <h3 class="service-item__title">ДЕЛОВЫЕ ВИЗЫ</h3>
                             <p class="service-item__descr">Визы для деловых поездок, конференций и встреч.</p>
@@ -255,9 +252,7 @@
                     </div>
 
                     <div class="service-item">
-                        <div class="service-item__icon">
-                            <i class="fa-solid fa-user-gear"></i>
-                        </div>
+                        <div class="service-item__icon"><i class="fa-solid fa-user-gear"></i></div>
                         <div class="service-item__info">
                             <h3 class="service-item__title">РАБОЧИЕ ВИЗЫ</h3>
                             <p class="service-item__descr">Оформление рабочих виз и разрешений на работу.</p>
@@ -265,9 +260,7 @@
                     </div>
 
                     <div class="service-item">
-                        <div class="service-item__icon">
-                            <i class="fa-solid fa-user-graduate"></i>
-                        </div>
+                        <div class="service-item__icon"><i class="fa-solid fa-user-graduate"></i></div>
                         <div class="service-item__info">
                             <h3 class="service-item__title">СТУДЕНЧЕСКИЕ ВИЗЫ</h3>
                             <p class="service-item__descr">Помощь в получении виз для обучения за рубежом.</p>
@@ -275,9 +268,7 @@
                     </div>
 
                     <div class="service-item">
-                        <div class="service-item__icon">
-                            <i class="fa-regular fa-clock"></i>
-                        </div>
+                        <div class="service-item__icon"><i class="fa-regular fa-clock"></i></div>
                         <div class="service-item__info">
                             <h3 class="service-item__title">СРОЧНЫЕ ВИЗЫ</h3>
                             <p class="service-item__descr">Оформление виз в кратчайшие сроки.</p>
@@ -373,21 +364,43 @@
             <div class="reviews-block">
                 <h2 class="block-title">ОТЗЫВЫ КЛИЕНТОВ</h2>
                 
-                <div class="reviews-slider">
-                    <div class="review-card">
-                        <div class="review-card__quote">
-                            <i class="fa-solid fa-quote-left"></i>
-                        </div>
-                        <p class="review-card__text">
-                            Спасибо компании Mustafo Viza за... Все сделали быстро и профессионально!
-                        </p>
+                <div class="reviews-slider" id="reviews-slider">
+                    <div class="review-card active" data-index="0">
+                        <div class="review-card__quote"><i class="fa-solid fa-quote-left"></i></div>
+                        <p class="review-card__text">Mustafo Viza оформили мне шенгенскую визу в Литву всего за 5 дней! Всё прошло гладко, документы собрали сами, я только подписал. Рекомендую всем!</p>
                         <span class="review-card__author">— Азизбек Т., Ташкент</span>
                     </div>
-                    
-                    <div class="reviews-slider__dots">
-                        <span class="dot active"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
+                    <div class="review-card" data-index="1">
+                        <div class="review-card__quote"><i class="fa-solid fa-quote-left"></i></div>
+                        <p class="review-card__text">Обратилась за рабочей визой в Польшу. Специалисты очень внимательные, объяснили каждый шаг. Визу одобрили с первого раза! Огромное спасибо команде!</p>
+                        <span class="review-card__author">— Малика Р., Самарканд</span>
+                    </div>
+                    <div class="review-card" data-index="2">
+                        <div class="review-card__quote"><i class="fa-solid fa-quote-left"></i></div>
+                        <p class="review-card__text">Делал студенческую визу в Латвию. Цены разумные, работают быстро и честно. Уже второй раз обращаюсь — всегда доволен результатом. Профессионалы своего дела!</p>
+                        <span class="review-card__author">— Камол Ю., Фергана</span>
+                    </div>
+                    <div class="review-card" data-index="3">
+                        <div class="review-card__quote"><i class="fa-solid fa-quote-left"></i></div>
+                        <p class="review-card__text">Срочно потребовалась виза в Болгарию. Думала, не успею — но ребята из Mustafo Viza сделали всё за 3 дня. Очень благодарна, поеду к семье вовремя!</p>
+                        <span class="review-card__author">— Нилуфар Х., Бухара</span>
+                    </div>
+                    <div class="review-card" data-index="4">
+                        <div class="review-card__quote"><i class="fa-solid fa-quote-left"></i></div>
+                        <p class="review-card__text">Оформлял деловую визу в Хорватию. Очень профессиональный подход, помогли с переводом документов и правильным заполнением анкеты. Визу дали без проблем!</p>
+                        <span class="review-card__author">— Санжар М., Ташкент</span>
+                    </div>
+
+                    <div class="reviews-slider__controls">
+                        <button class="reviews-slider__btn" id="reviews-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="reviews-slider__dots" id="reviews-dots">
+                            <span class="dot active" data-dot="0"></span>
+                            <span class="dot" data-dot="1"></span>
+                            <span class="dot" data-dot="2"></span>
+                            <span class="dot" data-dot="3"></span>
+                            <span class="dot" data-dot="4"></span>
+                        </div>
+                        <button class="reviews-slider__btn" id="reviews-next"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -459,5 +472,30 @@
         <div class="morph-overlay__img" id="morph-overlay-img"></div>
     </div>
     <script src="script.js"></script>
+
+    <script>
+    // Reviews slider
+    (function() {
+        const cards = document.querySelectorAll('.review-card[data-index]');
+        const dots  = document.querySelectorAll('#reviews-dots .dot');
+        let current = 0;
+
+        function showSlide(n) {
+            cards.forEach(c => c.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            current = (n + cards.length) % cards.length;
+            cards[current].classList.add('active');
+            dots[current].classList.add('active');
+        }
+
+        document.getElementById('reviews-next')?.addEventListener('click', () => showSlide(current + 1));
+        document.getElementById('reviews-prev')?.addEventListener('click', () => showSlide(current - 1));
+        dots.forEach(d => d.addEventListener('click', () => showSlide(+d.dataset.dot)));
+
+        // Auto-play every 5s
+        setInterval(() => showSlide(current + 1), 5000);
+    })();
+    </script>
+
 </body>
 </html>
