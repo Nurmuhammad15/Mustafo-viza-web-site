@@ -7,6 +7,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script>
+        // Если открыт напрямую без перехода с сайта — идём на главную
+        (function() {
+            var ref = document.referrer;
+            var hasParams = window.location.search.length > 0;
+            var comingFromSite = ref && (ref.indexOf('index.html') !== -1 || ref.indexOf(window.location.hostname) !== -1);
+            // Разрешаем если есть referrer с нашего сайта или есть query параметры (country=...)
+            // Блокируем только прямое открытие без контекста
+            if (!ref && !hasParams && sessionStorage.getItem('visited') !== '1') {
+                window.location.replace('index.html');
+            }
+        })();
+    </script>
     <style>
         /* ==============================
            APPLY PAGE SPECIFIC STYLES
