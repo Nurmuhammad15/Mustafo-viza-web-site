@@ -13,16 +13,53 @@
 
     <div class="morph-entry" id="morph-entry"></div>
 
-    <header class="header header--country">
+        <header class="header header--country">
         <div class="container header__container">
             <a href="index.html" class="logo">
                 <div class="logo__img"><img src="logo.png" class="logo__img-icon" alt="Mustafo Viza Logo"></div>
                 <div class="logo__text">
                     <span class="logo__title">MUSTAFO VIZA</span>
-                    <span class="logo__subtitle">РАБОТА БЕЗ ГРАНИЦ</span>
+                    <span class="logo__subtitle" data-i18n="subtitle">РАБОТА БЕЗ ГРАНИЦ</span>
                 </div>
             </a>
+
+            <!-- NAV (burger menu) -->
+            <nav class="nav country-nav" id="country-nav-menu">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link" data-i18n="nav_home">Главная</a></li>
+                    <li><a href="index.html#services" class="nav__link" data-i18n="nav_services">Услуги</a></li>
+                    <li><a href="index.html#directions" class="nav__link" data-i18n="nav_countries">Страны</a></li>
+                    <li><a href="index.html#about" class="nav__link" data-i18n="nav_about">О нас</a></li>
+                    <li><a href="index.html#blog" class="nav__link" data-i18n="nav_blog">Блог</a></li>
+                    <li><a href="index.html#footer" class="nav__link" data-i18n="nav_contacts">Контакты</a></li>
+                    <li class="nav__consult-item">
+                        <a href="chat.html" class="btn btn--primary nav__consult-btn" data-i18n="nav_consult">Консультация</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header__actions country-header-actions">
+                <!-- Language Switcher -->
+                <div class="lang-switcher" id="lang-switcher">
+                    <button class="lang-btn active" data-lang="ru">RU</button>
+                    <span class="lang-divider">|</span>
+                    <button class="lang-btn" data-lang="uz">UZ</button>
+                </div>
+
+                <!-- Back button -->
+                <a href="index.html" class="back-btn">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span data-i18n="back_text">Назад</span>
+                </a>
+
+                <!-- Burger -->
+                <button class="burger-menu country-burger" id="country-burger-btn" aria-label="Открыть меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
+        </div>
     </header>
 
     <section class="country-hero" style="background-image: url('img_croatia.jpg');">
@@ -111,6 +148,84 @@
         </div>
     </footer>
 
-    <script src="country.js"></script>
+        <script src="country.js"></script>
+    <script>
+    // ============================================
+    // COUNTRY PAGE — Burger Menu
+    // ============================================
+    (function() {
+        var burgerBtn = document.getElementById('country-burger-btn');
+        var navMenu = document.getElementById('country-nav-menu');
+        if (burgerBtn && navMenu) {
+            burgerBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                burgerBtn.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                document.body.classList.toggle('no-scroll');
+            });
+            document.addEventListener('click', function(e) {
+                if (!navMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
+                    burgerBtn.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
+                }
+            });
+        }
+    })();
+
+    // ============================================
+    // LANGUAGE SWITCHER (RU / UZ)
+    // ============================================
+    (function() {
+        var translations = {
+            ru: {
+                subtitle: 'РАБОТА БЕЗ ГРАНИЦ',
+                nav_home: 'Главная',
+                nav_services: 'Услуги',
+                nav_countries: 'Страны',
+                nav_about: 'О нас',
+                nav_blog: 'Блог',
+                nav_contacts: 'Контакты',
+                nav_consult: 'Консультация',
+                back_text: 'Назад'
+            },
+            uz: {
+                subtitle: 'CHEGARASIZ ISH',
+                nav_home: 'Asosiy',
+                nav_services: 'Xizmatlar',
+                nav_countries: 'Davlatlar',
+                nav_about: 'Biz haqimizda',
+                nav_blog: 'Blog',
+                nav_contacts: 'Aloqa',
+                nav_consult: 'Maslahat',
+                back_text: 'Orqaga'
+            }
+        };
+
+        var savedLang = localStorage.getItem('mv_lang') || 'ru';
+        applyLang(savedLang);
+
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+            if (btn.dataset.lang === savedLang) btn.classList.add('active');
+            else btn.classList.remove('active');
+            btn.addEventListener('click', function() {
+                var lang = this.dataset.lang;
+                applyLang(lang);
+                localStorage.setItem('mv_lang', lang);
+                document.querySelectorAll('.lang-btn').forEach(function(b) {
+                    b.classList.toggle('active', b.dataset.lang === lang);
+                });
+            });
+        });
+
+        function applyLang(lang) {
+            var t = translations[lang] || translations['ru'];
+            document.querySelectorAll('[data-i18n]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n');
+                if (t[key]) el.textContent = t[key];
+            });
+        }
+    })();
+    </script>
 </body>
 </html>
