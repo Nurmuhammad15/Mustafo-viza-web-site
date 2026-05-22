@@ -348,3 +348,46 @@
         letter-spacing: 1px;
     }
 }
+
+/* =========================================
+   COUNTRY PAGE HEADER — прозрачный поверх hero
+   ========================================= */
+.header--country {
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    padding: 18px 0 !important;
+}
+
+.header--country .header__container {
+    justify-content: space-between;
+}
+
+/* Лого белый текст поверх картинки */
+.header--country .logo__title,
+.header--country .logo__subtitle {
+    color: #fff;
+}
+
+/* Кнопка "← Все направления" */
+.header--country .back-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 30px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(8px);
+    transition: background 0.2s, color 0.2s;
+    text-decoration: none;
+}
+.header--country .back-btn:hover {
+    background: rgba(238,169,26,0.85);
+    color: #06162e;
+    border-color: transparent;
+}
