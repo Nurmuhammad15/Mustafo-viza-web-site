@@ -1892,3 +1892,94 @@ ul {
 .header__actions .lang-btn:hover:not(.active) {
     color: rgba(255, 255, 255, 0.85);
 }
+
+/* =========================================
+   LANG DROPDOWN — капля со стрелкой
+   ========================================= */
+.lang-dropdown {
+    position: relative;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+}
+.lang-dropdown__trigger {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 50px;
+    padding: 8px 16px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    font-family: inherit;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 4px 14px rgba(0,0,0,0.2);
+    transition: background 0.22s, border-color 0.22s;
+    white-space: nowrap;
+}
+.lang-dropdown__trigger:hover {
+    background: rgba(255,255,255,0.14);
+    border-color: rgba(255,255,255,0.38);
+}
+.lang-dropdown__arrow {
+    font-size: 10px;
+    opacity: 0.7;
+    transition: transform 0.25s ease;
+}
+.lang-dropdown.open .lang-dropdown__arrow {
+    transform: rotate(180deg);
+}
+.lang-dropdown__menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 150px;
+    background: rgba(10, 25, 55, 0.92);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 14px;
+    padding: 6px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.1);
+    z-index: 9999;
+    animation: langDropDown 0.2s ease;
+}
+.lang-dropdown.open .lang-dropdown__menu {
+    display: block;
+}
+@keyframes langDropDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.lang-dropdown__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 14px;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    color: rgba(255,255,255,0.75);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+    transition: background 0.18s, color 0.18s;
+}
+.lang-dropdown__item:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+}
+.lang-dropdown__item.active {
+    background: rgba(238,169,26,0.18);
+    color: #eea91a;
+}

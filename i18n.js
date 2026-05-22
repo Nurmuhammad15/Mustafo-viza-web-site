@@ -357,3 +357,58 @@ function mvApplyLang(lang) {
     mvApplyLang(lang);
   });
 })();
+
+// ============================================
+//  LANG DROPDOWN — toggle open/close + label
+// ============================================
+(function() {
+  function initLangDropdown() {
+    var trigger = document.getElementById('lang-trigger');
+    var menu    = document.getElementById('lang-menu');
+    var wrapper = document.getElementById('lang-switcher');
+    var current = document.getElementById('lang-current');
+    if (!trigger || !menu) return;
+
+    // Toggle dropdown on trigger click
+    trigger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      wrapper.classList.toggle('open');
+    });
+
+    // Close on outside click
+    document.addEventListener('click', function() {
+      wrapper.classList.remove('open');
+    });
+
+    // On lang button click — update label, close dropdown, mark active
+    menu.addEventListener('click', function(e) {
+      var btn = e.target.closest('.lang-btn');
+      if (!btn) return;
+      var lang = btn.dataset.lang;
+      if (!lang) return;
+      // Update displayed label
+      if (current) {
+        current.textContent = lang === 'uz' ? 'Узб' : 'Рус';
+      }
+      // Mark active
+      menu.querySelectorAll('.lang-btn').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.lang === lang);
+      });
+      // Close dropdown
+      wrapper.classList.remove('open');
+    });
+
+    // Set initial label from saved lang
+    var saved = localStorage.getItem('mv_lang') || 'ru';
+    if (current) current.textContent = saved === 'uz' ? 'Узб' : 'Рус';
+    menu.querySelectorAll('.lang-btn').forEach(function(b) {
+      b.classList.toggle('active', b.dataset.lang === saved);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLangDropdown);
+  } else {
+    initLangDropdown();
+  }
+})();
