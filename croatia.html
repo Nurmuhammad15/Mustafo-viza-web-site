@@ -20,10 +20,15 @@
             </a>
 
             <div class="header__actions country-header-actions">
-                <div class="lang-switcher" id="lang-switcher">
-                    <button class="lang-btn" data-lang="ru">Рус</button>
-                    <span class="lang-divider">|</span>
-                    <button class="lang-btn" data-lang="uz">Узб</button>
+                <div class="lang-switcher lang-dropdown" id="lang-switcher">
+                    <button class="lang-dropdown__trigger" id="lang-trigger">
+                        <span class="lang-dropdown__current" id="lang-current">Рус</span>
+                        <i class="fa-solid fa-chevron-down lang-dropdown__arrow" id="lang-arrow"></i>
+                    </button>
+                    <div class="lang-dropdown__menu" id="lang-menu">
+                        <button class="lang-btn lang-dropdown__item" data-lang="ru">🇷🇺 Русский</button>
+                        <button class="lang-btn lang-dropdown__item" data-lang="uz">🇺🇿 O'zbek</button>
+                    </div>
                 </div>
                 <a href="index.html" class="back-btn">
                     <i class="fa-solid fa-arrow-left"></i>
