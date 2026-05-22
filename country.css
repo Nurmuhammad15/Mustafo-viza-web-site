@@ -468,3 +468,46 @@
     .country-burger { display: flex; }
     .header--country .back-btn { padding: 6px 12px; font-size: 12px; }
 }
+
+/* =========================================
+   COUNTRY NAV — Dropdown inside burger
+   ========================================= */
+.country-nav .nav__item.dropdown > .nav__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.country-nav .nav__item.dropdown .dropdown__menu {
+    display: none;
+    position: static;
+    background: rgba(255,255,255,0.04);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 0 8px 16px;
+    margin-bottom: 8px;
+    box-shadow: none;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+}
+.country-nav .nav__item.dropdown.open .dropdown__menu {
+    display: block;
+}
+.country-nav .nav__item.dropdown .dropdown__item {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    padding: 10px 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.country-nav .nav__item.dropdown .dropdown__item:hover {
+    color: #eea91a;
+}
+.country-nav .nav__item.dropdown .drop-icon {
+    transition: transform 0.3s;
+}
+.country-nav .nav__item.dropdown.open .drop-icon {
+    transform: rotate(180deg);
+}

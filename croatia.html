@@ -13,7 +13,7 @@
 
     <div class="morph-entry" id="morph-entry"></div>
 
-        <header class="header header--country">
+            <header class="header header--country">
         <div class="container header__container">
             <a href="index.html" class="logo">
                 <div class="logo__img"><img src="logo.png" class="logo__img-icon" alt="Mustafo Viza Logo"></div>
@@ -26,8 +26,26 @@
             <nav class="nav country-nav" id="country-nav-menu">
                 <ul class="nav__list">
                     <li><a href="index.html" class="nav__link" data-i18n="nav_home">Главная</a></li>
-                    <li><a href="index.html#services" class="nav__link" data-i18n="nav_services">Услуги</a></li>
-                    <li><a href="index.html#directions" class="nav__link" data-i18n="nav_countries">Страны</a></li>
+                    <li class="nav__item dropdown">
+                        <a href="index.html#services" class="nav__link" data-i18n="nav_services">Услуги <i class="fa-solid fa-chevron-down drop-icon"></i></a>
+                        <div class="dropdown__menu" id="country-services-dropdown">
+                            <a href="index.html#services" class="dropdown__item" data-i18n="nav_svc_tourist">Туристические визы</a>
+                            <a href="index.html#services" class="dropdown__item" data-i18n="nav_svc_biz">Деловые визы</a>
+                            <a href="index.html#services" class="dropdown__item" data-i18n="nav_svc_work">Рабочие визы</a>
+                            <a href="index.html#services" class="dropdown__item" data-i18n="nav_svc_study">Студенческие визы</a>
+                            <a href="index.html#services" class="dropdown__item" data-i18n="nav_svc_urgent">Срочные визы</a>
+                        </div>
+                    </li>
+                    <li class="nav__item dropdown">
+                        <a href="index.html#directions" class="nav__link" data-i18n="nav_countries">Страны <i class="fa-solid fa-chevron-down drop-icon"></i></a>
+                        <div class="dropdown__menu dropdown__menu--countries" id="country-countries-dropdown">
+                            <a href="lithuania.html" class="dropdown__item"><span class="dropdown__code">LT</span> <span data-i18n="nav_lt">Литва</span></a>
+                            <a href="latvia.html" class="dropdown__item"><span class="dropdown__code">LV</span> <span data-i18n="nav_lv">Латвия</span></a>
+                            <a href="bulgaria.html" class="dropdown__item"><span class="dropdown__code">BG</span> <span data-i18n="nav_bg">Болгария</span></a>
+                            <a href="croatia.html" class="dropdown__item"><span class="dropdown__code">HR</span> <span data-i18n="nav_hr">Хорватия</span></a>
+                            <a href="poland.html" class="dropdown__item"><span class="dropdown__code">PL</span> <span data-i18n="nav_pl">Польша</span></a>
+                        </div>
+                    </li>
                     <li><a href="index.html#about" class="nav__link" data-i18n="nav_about">О нас</a></li>
                     <li><a href="index.html#blog" class="nav__link" data-i18n="nav_blog">Блог</a></li>
                     <li><a href="index.html#footer" class="nav__link" data-i18n="nav_contacts">Контакты</a></li>
@@ -39,7 +57,7 @@
 
             <div class="header__actions country-header-actions">
                 <div class="lang-switcher" id="lang-switcher">
-                    <button class="lang-btn active" data-lang="ru">RU</button>
+                    <button class="lang-btn" data-lang="ru">RU</button>
                     <span class="lang-divider">|</span>
                     <button class="lang-btn" data-lang="uz">UZ</button>
                 </div>
@@ -59,11 +77,11 @@
     <section class="country-hero" style="background-image: url('img_croatia.jpg');">
         <div class="country-hero__overlay"></div>
         <div class="container country-hero__content">
-            <p class="country-hero__label">Виза в</p>
-            <h1 class="country-hero__title">ХОРВАТИЮ</h1>
+            <p class="country-hero__label" data-i18n="hr_label">Виза в</p>
+            <h1 class="country-hero__title" data-i18n="hr_title">ХОРВАТИЮ</h1>
             <p class="country-hero__descr">Загреб · Адриатика · Дубровник</p>
             <div class="country-hero__badges">
-                <span class="badge"><i class="fa-solid fa-clock"></i> Срок: 7–10 дней</span>
+                <span class="badge"><i class="fa-solid fa-clock"></i> <span data-i18n="hr_badge1">Срок: 7–10 дней</span></span>
                 <span class="badge"><i class="fa-solid fa-circle-check"></i> Одобрение: 94%</span>
                 <span class="badge"><i class="fa-solid fa-shield-halved"></i> Шенген</span>
             </div>
@@ -74,33 +92,33 @@
     <section class="visa-types">
         <div class="container">
             <div class="section-title-wrapper">
-                <h2 class="section-title">ВИДЫ ВИЗ</h2>
+                <h2 class="section-title" data-i18n="vt_title">ВИДЫ ВИЗ</h2>
                 <span class="section-title-line"></span>
             </div>
             <div class="visa-grid">
                 <div class="visa-card" style="--delay: 0s">
                     <div class="visa-card__icon"><i class="fa-solid fa-umbrella-beach"></i></div>
-                    <h3>Туристическая</h3>
-                    <p>Для путешествий и туризма. До 90 дней в стране назначения.</p>
-                    <div class="visa-card__price">от $?</div>
+                    <h3 data-i18n="vt1_title">Туристическая</h3>
+                    <p data-i18n="vt1_descr">Для путешествий и туризма. До 90 дней в стране назначения.</p>
+                    <div class="visa-card__price" data-i18n="vt_price">от $?</div>
                 </div>
                 <div class="visa-card" style="--delay: 0.1s">
                     <div class="visa-card__icon"><i class="fa-solid fa-briefcase"></i></div>
-                    <h3>Деловая</h3>
-                    <p>Для бизнес-переговоров, конференций и встреч с партнёрами.</p>
-                    <div class="visa-card__price">от $?</div>
+                    <h3 data-i18n="vt2_title">Деловая</h3>
+                    <p data-i18n="vt2_descr">Для бизнес-переговоров, конференций и встреч с партнёрами.</p>
+                    <div class="visa-card__price" data-i18n="vt_price">от $?</div>
                 </div>
                 <div class="visa-card" style="--delay: 0.2s">
                     <div class="visa-card__icon"><i class="fa-solid fa-hard-hat"></i></div>
-                    <h3>Рабочая</h3>
-                    <p>Официальное трудоустройство. Помогаем с приглашением от работодателя.</p>
-                    <div class="visa-card__price">от $?</div>
+                    <h3 data-i18n="vt3_title">Рабочая</h3>
+                    <p data-i18n="vt3_descr">Официальное трудоустройство. Помогаем с приглашением от работодателя.</p>
+                    <div class="visa-card__price" data-i18n="vt_price">от $?</div>
                 </div>
                 <div class="visa-card" style="--delay: 0.3s">
                     <div class="visa-card__icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                    <h3>Студенческая</h3>
-                    <p>Для обучения в университетах и языковых школах.</p>
-                    <div class="visa-card__price">от $?</div>
+                    <h3 data-i18n="vt4_title">Студенческая</h3>
+                    <p data-i18n="vt4_descr">Для обучения в университетах и языковых школах.</p>
+                    <div class="visa-card__price" data-i18n="vt_price">от $?</div>
                 </div>
             </div>
         </div>
@@ -109,16 +127,16 @@
     <section class="docs-section">
         <div class="container docs-section__grid">
             <div class="docs-section__text">
-                <h2>НЕОБХОДИМЫЕ ДОКУМЕНТЫ</h2>
+                <h2 data-i18n="docs_title">НЕОБХОДИМЫЕ ДОКУМЕНТЫ</h2>
                 <ul class="docs-list">
-                    <li><i class="fa-solid fa-circle-check"></i> Загранпаспорт (действителен 6+ мес.)</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Заполненная анкета-заявление</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Фото 3.5×4.5 см (2 шт.)</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Бронь отеля или приглашение</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Авиабилеты туда-обратно</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Выписка с банковского счёта</li>
+                    <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="doc1">Загранпаспорт (действителен 6+ мес.)</span></li>
+                    <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="doc2">Заполненная анкета-заявление</span></li>
+                    <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="doc3">Фото 3.5×4.5 см (2 шт.)</span></li>
+                    <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="doc4">Бронь отеля или приглашение</span></li>
+                    <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="doc5">Авиабилеты туда-обратно</span></li>
+                    <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="doc6">Выписка с банковского счёта</span></li>
                 </ul>
-                <a href="apply.html?country=hr" class="btn btn--primary btn--large" style="margin-top:32px; display:inline-flex;">
+                <a href="apply.html?country=hr" class="btn btn--primary btn--large" style="margin-top:32px; display:inline-flex;" data-i18n="docs_btn">
                     Подать заявку
                 </a>
             </div>
@@ -128,8 +146,8 @@
 
     <section class="country-cta">
         <div class="container country-cta__inner">
-            <h2>Готовы оформить визу?</h2>
-            <p>Наши специалисты помогут собрать документы и подать заявку. Без отказов и лишних хлопот.</p>
+            <h2 data-i18n="cta_title">Готовы оформить визу?</h2>
+            <p data-i18n="cta_descr">Наши специалисты помогут собрать документы и подать заявку. Без отказов и лишних хлопот.</p>
             <a href="chat.html" class="btn btn--primary btn--large">Бесплатная консультация</a>
         </div>
     </section>
@@ -137,12 +155,13 @@
     <footer class="footer" style="padding: 28px 0;">
         <div class="container">
             <div class="footer__bottom" style="border:none; padding:0; text-align:center;">
-                <p>&copy; 2024 Mustafo Viza. Все права защищены.</p>
+                <p><span data-i18n="footer_copy">© 2024 Mustafo Viza. Все права защищены.</span></p>
             </div>
         </div>
     </footer>
 
-        <script src="country.js"></script>
+            <script src="i18n.js"></script>
+    <script src="country.js"></script>
     <script>
     (function() {
         var burgerBtn = document.getElementById('country-burger-btn');
@@ -161,27 +180,14 @@
                     document.body.classList.remove('no-scroll');
                 }
             });
-        }
-    })();
-    (function() {
-        var translations = {
-            ru: { subtitle:'РАБОТА БЕЗ ГРАНИЦ', nav_home:'Главная', nav_services:'Услуги', nav_countries:'Страны', nav_about:'О нас', nav_blog:'Блог', nav_contacts:'Контакты', nav_consult:'Консультация', back_text:'Назад' },
-            uz: { subtitle:'CHEGARASIZ ISH', nav_home:'Asosiy', nav_services:'Xizmatlar', nav_countries:'Davlatlar', nav_about:'Biz haqimizda', nav_blog:'Blog', nav_contacts:'Aloqa', nav_consult:'Maslahat', back_text:'Orqaga' }
-        };
-        var savedLang = localStorage.getItem('mv_lang') || 'ru';
-        applyLang(savedLang);
-        document.querySelectorAll('.lang-btn').forEach(function(btn) {
-            btn.classList.toggle('active', btn.dataset.lang === savedLang);
-            btn.addEventListener('click', function() {
-                var lang = this.dataset.lang;
-                applyLang(lang);
-                localStorage.setItem('mv_lang', lang);
-                document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.toggle('active', b.dataset.lang === lang); });
+            // Dropdown toggles inside burger menu
+            navMenu.querySelectorAll && navMenu.querySelectorAll('.nav__item.dropdown > .nav__link').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var parent = this.closest('.nav__item');
+                    parent.classList.toggle('open');
+                });
             });
-        });
-        function applyLang(lang) {
-            var t = translations[lang] || translations['ru'];
-            document.querySelectorAll('[data-i18n]').forEach(function(el) { var k = el.getAttribute('data-i18n'); if (t[k]) el.textContent = t[k]; });
         }
     })();
     </script>

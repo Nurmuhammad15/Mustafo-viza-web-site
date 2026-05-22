@@ -18,24 +18,24 @@
                 </div>
                 <div class="logo__text">
                     <span class="logo__title">MUSTAFO VIZA</span>
-                    <span class="logo__subtitle">РАБОТА БЕЗ ГРАНИЦ</span>
+                    <span class="logo__subtitle" data-i18n="subtitle">РАБОТА БЕЗ ГРАНИЦ</span>
                 </div>
             </a>
 
             <nav class="nav" id="nav-menu">
                 <ul class="nav__list">
-                    <li><a href="#home" class="nav__link active">Главная</a></li>
+                    <li><a href="#home" class="nav__link active" data-i18n="nav_home">Главная</a></li>
                     
                     <li class="nav__item dropdown">
                         <a href="#services" class="nav__link" id="services-toggle">
                             Услуги <i class="fa-solid fa-chevron-down drop-icon"></i>
                         </a>
                         <div class="dropdown__menu" id="services-dropdown">
-                            <a href="#" class="dropdown__item">Туристические визы</a>
-                            <a href="#" class="dropdown__item">Деловые визы</a>
-                            <a href="#" class="dropdown__item">Рабочие визы</a>
-                            <a href="#" class="dropdown__item">Студенческие визы</a>
-                            <a href="#" class="dropdown__item">Срочные визы</a>
+                            <a href="#" class="dropdown__item" data-i18n="nav_svc_tourist">Туристические визы</a>
+                            <a href="#" class="dropdown__item" data-i18n="nav_svc_biz">Деловые визы</a>
+                            <a href="#" class="dropdown__item" data-i18n="nav_svc_work">Рабочие визы</a>
+                            <a href="#" class="dropdown__item" data-i18n="nav_svc_study">Студенческие визы</a>
+                            <a href="#" class="dropdown__item" data-i18n="nav_svc_urgent">Срочные визы</a>
                         </div>
                     </li>
 
@@ -45,27 +45,27 @@
                         </a>
                         <div class="dropdown__menu dropdown__menu--countries" id="countries-dropdown">
                             <a href="#" class="dropdown__item">
-                                <span class="dropdown__code">LT</span> Литва
+                                <span class="dropdown__code">LT</span> <span data-i18n="nav_lt">Литва</span>
                             </a>
                             <a href="#" class="dropdown__item">
-                                <span class="dropdown__code">LV</span> Латвия
+                                <span class="dropdown__code">LV</span> <span data-i18n="nav_lv">Латвия</span>
                             </a>
                             <a href="#" class="dropdown__item">
-                                <span class="dropdown__code">BG</span> Болгария
+                                <span class="dropdown__code">BG</span> <span data-i18n="nav_bg">Болгария</span>
                             </a>
                             <a href="#" class="dropdown__item">
-                                <span class="dropdown__code">HR</span> Хорватия
+                                <span class="dropdown__code">HR</span> <span data-i18n="nav_hr">Хорватия</span>
                             </a>
                             <a href="#" class="dropdown__item">
-                                <span class="dropdown__code">PL</span> Польша
+                                <span class="dropdown__code">PL</span> <span data-i18n="nav_pl">Польша</span>
                             </a>
                         </div>
                     </li>
-                    <li><a href="#about" class="nav__link">О нас</a></li>
-                    <li><a href="#blog" class="nav__link">Блог</a></li>
-                    <li><a href="#footer" class="nav__link">Контакты</a></li>
+                    <li><a href="#about" class="nav__link" data-i18n="nav_about">О нас</a></li>
+                    <li><a href="#blog" class="nav__link" data-i18n="nav_blog">Блог</a></li>
+                    <li><a href="#footer" class="nav__link" data-i18n="nav_contacts">Контакты</a></li>
                     <li class="nav__consult-item">
-                        <a href="chat.html" class="btn btn--primary nav__consult-btn">Консультация</a>
+                        <a href="chat.html" class="btn btn--primary nav__consult-btn" data-i18n="nav_consult">Консультация</a>
                     </li>
                 </ul>
             </nav>
@@ -74,8 +74,13 @@
                 <a href="tel:+998951240599" class="header__phone">
                     <i class="fa-solid fa-phone phone-icon"></i> +998 95 124 05 99
                 </a>
-                <a href="chat.html" class="btn btn--primary header__btn">Консультация</a>
+                <a href="chat.html" class="btn btn--primary header__btn" data-i18n="nav_consult">Консультация</a>
                 
+                <div class="lang-switcher" id="lang-switcher">
+                    <button class="lang-btn" data-lang="ru">RU</button>
+                    <span class="lang-divider">|</span>
+                    <button class="lang-btn" data-lang="uz">UZ</button>
+                </div>
                 <button class="burger-menu" id="burger-btn" aria-label="Открыть меню">
                     <span></span>
                     <span></span>
@@ -91,29 +96,29 @@
         <div class="container hero__container">
             <div class="hero__content">
                 <h1 class="hero__title">MUSTAFO VIZA</h1>
-                <p class="hero__pretitle">ВИЗЫ В ЛЮБУЮ СТРАНУ МИРА</p>
+                <p class="hero__pretitle" data-i18n="hero_pretitle">ВИЗЫ В ЛЮБУЮ СТРАНУ МИРА</p>
                 <p class="hero__descr">
                     Профессионально. Надежно. Без лишних хлопот. <br>
                     Оформим визу быстро и с гарантией результата.
                 </p>
                 
                 <div class="hero__cta">
-                    <a href="#footer" class="btn btn--primary btn--large">Бесплатная консультация</a>
-                    <a href="#services" class="btn btn--outline btn--large">Рассчитать стоимость</a>
+                    <a href="#footer" class="btn btn--primary btn--large" data-i18n="hero_cta1">Бесплатная консультация</a>
+                    <a href="#services" class="btn btn--outline btn--large" data-i18n="hero_cta2">Рассчитать стоимость</a>
                 </div>
 
                 <div class="hero__features">
                     <div class="feature-item">
                         <div class="feature-item__icon"><i class="fa-regular fa-user"></i></div>
-                        <p class="feature-item__text">Индивидуальный подход к каждому клиенту</p>
+                        <p class="feature-item__text" data-i18n="feat1">Индивидуальный подход к каждому клиенту</p>
                     </div>
                     <div class="feature-item">
                         <div class="feature-item__icon"><i class="fa-solid fa-chart-line"></i></div>
-                        <p class="feature-item__text">Высокий процент одобрения виз</p>
+                        <p class="feature-item__text" data-i18n="feat2">Высокий процент одобрения виз</p>
                     </div>
                     <div class="feature-item">
                         <div class="feature-item__icon"><i class="fa-regular fa-star"></i></div>
-                        <p class="feature-item__text">Поддержка на всех этапах оформления</p>
+                        <p class="feature-item__text" data-i18n="feat3">Поддержка на всех этапах оформления</p>
                     </div>
                 </div>
             </div>
@@ -128,27 +133,27 @@
                     <div class="stat-card__icon"><i class="fa-solid fa-award"></i></div>
                     <div class="stat-card__info">
                         <h3>10+</h3>
-                        <p>Лет опыта</p>
+                        <p data-i18n="stat1_label">Лет опыта</p>
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-card__icon"><i class="fa-solid fa-globe"></i></div>
                     <div class="stat-card__info">
                         <h3>50+</h3>
-                        <p>Стран</p>
+                        <p data-i18n="stat2_label">Стран</p>
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-card__icon"><i class="fa-regular fa-circle-check"></i></div>
                     <div class="stat-card__info">
                         <h3>98%</h3>
-                        <p>Одобрение виз</p>
+                        <p data-i18n="stat3_label">Одобрение виз</p>
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-card__info">
                         <h3>1000+</h3>
-                        <p>Довольных клиентов</p>
+                        <p data-i18n="stat4_label">Довольных клиентов</p>
                     </div>
                 </div>
             </div>
@@ -160,7 +165,7 @@
         <section class="directions" id="directions">
             <div class="container">
                 <div class="section-title-wrapper">
-                    <h2 class="section-title">ПОПУЛЯРНЫЕ НАПРАВЛЕНИЯ</h2>
+                    <h2 class="section-title" data-i18n="dir_title">ПОПУЛЯРНЫЕ НАПРАВЛЕНИЯ</h2>
                     <span class="section-title-line"></span>
                 </div>
 
@@ -168,7 +173,7 @@
                     <a href="lithuania.html" class="direction-card morph-card" data-img="img_lithuania.jpg">
                         <div class="direction-card__bg" style="background-image: url('img_lithuania.jpg');"></div>
                         <div class="direction-card__content">
-                            <h3 class="direction-card__title">ЛИТВА</h3>
+                            <h3 class="direction-card__title" data-i18n="dir_lt">ЛИТВА</h3>
                             <div class="direction-card__arrow">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </div>
@@ -178,7 +183,7 @@
                     <a href="latvia.html" class="direction-card morph-card" data-img="img_latvia.jpg">
                         <div class="direction-card__bg" style="background-image: url('img_latvia.jpg');"></div>
                         <div class="direction-card__content">
-                            <h3 class="direction-card__title">ЛАТВИЯ</h3>
+                            <h3 class="direction-card__title" data-i18n="dir_lv">ЛАТВИЯ</h3>
                             <div class="direction-card__arrow">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </div>
@@ -188,7 +193,7 @@
                     <a href="bulgaria.html" class="direction-card morph-card" data-img="img_bulgaria.jpg">
                         <div class="direction-card__bg" style="background-image: url('img_bulgaria.jpg');"></div>
                         <div class="direction-card__content">
-                            <h3 class="direction-card__title">БОЛГАРИЯ</h3>
+                            <h3 class="direction-card__title" data-i18n="dir_bg">БОЛГАРИЯ</h3>
                             <div class="direction-card__arrow">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </div>
@@ -198,7 +203,7 @@
                     <a href="croatia.html" class="direction-card morph-card" data-img="img_croatia.jpg">
                         <div class="direction-card__bg" style="background-image: url('img_croatia.jpg');"></div>
                         <div class="direction-card__content">
-                            <h3 class="direction-card__title">ХОРВАТИЯ</h3>
+                            <h3 class="direction-card__title" data-i18n="dir_hr">ХОРВАТИЯ</h3>
                             <div class="direction-card__arrow">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </div>
@@ -208,7 +213,7 @@
                     <a href="poland.html" class="direction-card morph-card" data-img="img_poland.jpg">
                         <div class="direction-card__bg" style="background-image: url('img_poland.jpg');"></div>
                         <div class="direction-card__content">
-                            <h3 class="direction-card__title">ПОЛЬША</h3>
+                            <h3 class="direction-card__title" data-i18n="dir_pl">ПОЛЬША</h3>
                             <div class="direction-card__arrow">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </div>
@@ -217,7 +222,7 @@
                 </div>
 
                 <div class="section-btn-wrapper">
-                    <a href="#" class="btn btn--outline btn--action">Все страны</a>
+                    <a href="#" class="btn btn--outline btn--action" data-i18n="dir_btn">Все страны</a>
                 </div>
             </div>
         </section>
@@ -225,7 +230,7 @@
         <section class="services" id="services">
             <div class="container">
                 <div class="section-title-wrapper">
-                    <h2 class="section-title">НАШИ УСЛУГИ</h2>
+                    <h2 class="section-title" data-i18n="svc_title">НАШИ УСЛУГИ</h2>
                     <span class="section-title-line"></span>
                 </div>
 
@@ -233,54 +238,54 @@
                     <div class="service-item">
                         <div class="service-item__icon"><i class="fa-solid fa-passport"></i></div>
                         <div class="service-item__info">
-                            <h3 class="service-item__title">ТУРЦИЯ</h3>
-                            <p class="service-item__descr">Оформление туристических виз в любую страну мира.</p>
+                            <h3 class="service-item__title" data-i18n="svc1_title">ТУРИСТИЧЕСКИЕ ВИЗЫ</h3>
+                            <p class="service-item__descr" data-i18n="svc1_descr">Оформление туристических виз в любую страну мира.</p>
                         </div>
                     </div>
 
                     <div class="service-item">
                         <div class="service-item__icon"><i class="fa-regular fa-comments"></i></div>
                         <div class="service-item__info">
-                            <h3 class="service-item__title">ГОСТЕВЫЕ ВИЗЫ</h3>
-                            <p class="service-item__descr">Приглашения для посещения родственников и друзей.</p>
+                            <h3 class="service-item__title" data-i18n="svc2_title">ГОСТЕВЫЕ ВИЗЫ</h3>
+                            <p class="service-item__descr" data-i18n="svc2_descr">Приглашения для посещения родственников и друзей.</p>
                         </div>
                     </div>
 
                     <div class="service-item">
                         <div class="service-item__icon"><i class="fa-solid fa-briefcase"></i></div>
                         <div class="service-item__info">
-                            <h3 class="service-item__title">ДЕЛОВЫЕ ВИЗЫ</h3>
-                            <p class="service-item__descr">Визы для деловых поездок, конференций и встреч.</p>
+                            <h3 class="service-item__title" data-i18n="svc3_title">ДЕЛОВЫЕ ВИЗЫ</h3>
+                            <p class="service-item__descr" data-i18n="svc3_descr">Визы для деловых поездок, конференций и встреч.</p>
                         </div>
                     </div>
 
                     <div class="service-item">
                         <div class="service-item__icon"><i class="fa-solid fa-user-gear"></i></div>
                         <div class="service-item__info">
-                            <h3 class="service-item__title">РАБОЧИЕ ВИЗЫ</h3>
-                            <p class="service-item__descr">Оформление рабочих виз и разрешений на работу.</p>
+                            <h3 class="service-item__title" data-i18n="svc4_title">РАБОЧИЕ ВИЗЫ</h3>
+                            <p class="service-item__descr" data-i18n="svc4_descr">Оформление рабочих виз и разрешений на работу.</p>
                         </div>
                     </div>
 
                     <div class="service-item">
                         <div class="service-item__icon"><i class="fa-solid fa-user-graduate"></i></div>
                         <div class="service-item__info">
-                            <h3 class="service-item__title">СТУДЕНЧЕСКИЕ ВИЗЫ</h3>
-                            <p class="service-item__descr">Помощь в получении виз для обучения за рубежом.</p>
+                            <h3 class="service-item__title" data-i18n="svc5_title">СТУДЕНЧЕСКИЕ ВИЗЫ</h3>
+                            <p class="service-item__descr" data-i18n="svc5_descr">Помощь в получении виз для обучения за рубежом.</p>
                         </div>
                     </div>
 
                     <div class="service-item">
                         <div class="service-item__icon"><i class="fa-regular fa-clock"></i></div>
                         <div class="service-item__info">
-                            <h3 class="service-item__title">СРОЧНЫЕ ВИЗЫ</h3>
-                            <p class="service-item__descr">Оформление виз в кратчайшие сроки.</p>
+                            <h3 class="service-item__title" data-i18n="svc6_title">СРОЧНЫЕ ВИЗЫ</h3>
+                            <p class="service-item__descr" data-i18n="svc6_descr">Оформление виз в кратчайшие сроки.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="section-btn-wrapper">
-                    <a href="#" class="btn btn--outline btn--action">Все услуги</a>
+                    <a href="#" class="btn btn--outline btn--action" data-i18n="svc_btn">Все услуги</a>
                 </div>
             </div>
         </section>
@@ -290,7 +295,7 @@
     <section class="workflow" id="about">
         <div class="container">
             <div class="section-title-wrapper">
-                <h2 class="section-title section-title--white">КАК МЫ РАБОТАЕМ</h2>
+                <h2 class="section-title section-title--white" data-i18n="wf_title">КАК МЫ РАБОТАЕМ</h2>
                 <span class="section-title-line"></span>
             </div>
 
@@ -300,8 +305,8 @@
                     <div class="workflow-step__icon">
                         <i class="fa-regular fa-comments"></i>
                     </div>
-                    <h3 class="workflow-step__title">КОНСУЛЬТАЦИЯ</h3>
-                    <p class="workflow-step__descr">Бесплатная консультация и подбор оптимального варианта.</p>
+                    <h3 class="workflow-step__title" data-i18n="wf1_title">КОНСУЛЬТАЦИЯ</h3>
+                    <p class="workflow-step__descr" data-i18n="wf1_descr">Бесплатная консультация и подбор оптимального варианта.</p>
                     <div class="workflow-step__arrow"></div>
                 </div>
 
@@ -310,8 +315,8 @@
                     <div class="workflow-step__icon">
                         <i class="fa-regular fa-file-lines"></i>
                     </div>
-                    <h3 class="workflow-step__title">ПОДГОТОВКА ДОКУМЕНТОВ</h3>
-                    <p class="workflow-step__descr">Помогаем собрать и проверить все необходимые документы.</p>
+                    <h3 class="workflow-step__title" data-i18n="wf2_title">ПОДГОТОВКА ДОКУМЕНТОВ</h3>
+                    <p class="workflow-step__descr" data-i18n="wf2_descr">Помогаем собрать и проверить все необходимые документы.</p>
                     <div class="workflow-step__arrow"></div>
                 </div>
 
@@ -320,8 +325,8 @@
                     <div class="workflow-step__icon">
                         <i class="fa-solid fa-user-check"></i>
                     </div>
-                    <h3 class="workflow-step__title">ПОДАЧА ЗАЯВКИ</h3>
-                    <p class="workflow-step__descr">Подаем документы в посольство или визовый центр.</p>
+                    <h3 class="workflow-step__title" data-i18n="wf3_title">ПОДАЧА ЗАЯВКИ</h3>
+                    <p class="workflow-step__descr" data-i18n="wf3_descr">Подаем документы в посольство или визовый центр.</p>
                     <div class="workflow-step__arrow"></div>
                 </div>
 
@@ -330,8 +335,8 @@
                     <div class="workflow-step__icon">
                         <i class="fa-regular fa-calendar-check"></i>
                     </div>
-                    <h3 class="workflow-step__title">ПОЛУЧЕНИЕ ВИЗЫ</h3>
-                    <p class="workflow-step__descr">Вы получаете готовую визу и приглашение к путешествию!</p>
+                    <h3 class="workflow-step__title" data-i18n="wf4_title">ПОЛУЧЕНИЕ ВИЗЫ</h3>
+                    <p class="workflow-step__descr" data-i18n="wf4_descr">Вы получаете готовую визу и приглашение к путешествию!</p>
                 </div>
             </div>
         </div>
@@ -341,34 +346,34 @@
         <div class="container features-reviews__grid">
             
             <div class="features-block">
-                <h2 class="block-title">ПОЧЕМУ ВЫБИРАЮТ НАС?</h2>
+                <h2 class="block-title" data-i18n="feats_title">ПОЧЕМУ ВЫБИРАЮТ НАС?</h2>
                 <ul class="features-list">
                     <li class="features-list__item">
                         <i class="fa-regular fa-circle-check list-icon"></i>
-                        <span>Индивидуальный подход к каждому клиенту</span>
+                        <span data-i18n="feats1">Индивидуальный подход к каждому клиенту</span>
                     </li>
                     <li class="features-list__item">
                         <i class="fa-regular fa-circle-check list-icon"></i>
-                        <span>Опытные специалисты с высоким уровнем знаний</span>
+                        <span data-i18n="feats2">Опытные специалисты с высоким уровнем знаний</span>
                     </li>
                     <li class="features-list__item">
                         <i class="fa-regular fa-circle-check list-icon"></i>
-                        <span>Официальное оформление и гарантия надежности</span>
+                        <span data-i18n="feats3">Официальное оформление и гарантия надежности</span>
                     </li>
                     <li class="features-list__item">
                         <i class="fa-regular fa-circle-check list-icon"></i>
-                        <span>Поддержка на всех этаках оформления</span>
+                        <span data-i18n="feats4">Поддержка на всех этапах оформления</span>
                     </li>
                     <li class="features-list__item">
                         <i class="fa-regular fa-circle-check list-icon"></i>
-                        <span>Экономия вашего времени и сил</span>
+                        <span data-i18n="feats5">Экономия вашего времени и сил</span>
                     </li>
                 </ul>
-                <a href="chat.html" class="btn btn--primary btn--large features-block__btn">Получить консультацию</a>
+                <a href="chat.html" class="btn btn--primary btn--large features-block__btn" data-i18n="feats_btn">Получить консультацию</a>
             </div>
 
             <div class="reviews-block">
-                <h2 class="block-title">ОТЗЫВЫ КЛИЕНТОВ</h2>
+                <h2 class="block-title" data-i18n="reviews_title">ОТЗЫВЫ КЛИЕНТОВ</h2>
                 
                 <div class="reviews-slider" id="reviews-slider">
                     <div class="review-card active" data-index="0">
@@ -423,7 +428,7 @@
                         <img src="logo.png" class="logo__img-icon" alt="Mustafo Viza Logo">
                         <div class="logo__text">
                             <span class="logo__title">MUSTAFO VIZA</span>
-                            <span class="logo__subtitle">РАБОТА БЕЗ ГРАНИЦ</span>
+                            <span class="logo__subtitle" data-i18n="subtitle">РАБОТА БЕЗ ГРАНИЦ</span>
                         </div>
                     </div>
                     <p class="footer__text">Ваш надежный партнер в мире виз. Мы делаем путешествия доступными!</p>
@@ -435,7 +440,7 @@
                 </div>
 
                 <div class="footer__col">
-                    <h4 class="footer__title">КОНТАКТЫ</h4>
+                    <h4 class="footer__title" data-i18n="footer_contacts">КОНТАКТЫ</h4>
                     <ul class="footer__contacts">
                         <li><i class="fa-solid fa-phone phone-icon"></i> <a href="tel:+998951240599">+998 95 124 05 99</a></li>
                         <li><i class="fa-solid fa-phone phone-icon"></i> <a href="tel:+998889000599">+998 88 900 05 99</a></li>
@@ -445,29 +450,29 @@
                 </div>
 
                 <div class="footer__col">
-                    <h4 class="footer__title">ПОЛЕЗНЫЕ ССЫЛКИ</h4>
+                    <h4 class="footer__title" data-i18n="footer_links">ПОЛЕЗНЫЕ ССЫЛКИ</h4>
                     <ul class="footer__links">
-                        <li><a href="#services">Виды виз</a></li>
-                        <li><a href="#about">Документы</a></li>
-                        <li><a href="#blog">Вопросы и ответы</a></li>
-                        <li><a href="#blog">Блог</a></li>
-                        <li><a href="#">Политика конфиденциальности</a></li>
+                        <li><a href="#services" data-i18n="footer_link1">Виды виз</a></li>
+                        <li><a href="#about" data-i18n="footer_link2">Документы</a></li>
+                        <li><a href="#blog" data-i18n="footer_link3">Вопросы и ответы</a></li>
+                        <li><a href="#blog"><span data-i18n="footer_link4">Блог</span></a></li>
+                        <li><a href="#" data-i18n="footer_link5">Политика конфиденциальности</a></li>
                     </ul>
                 </div>
 
                 <div class="footer__col">
-                    <h4 class="footer__title">ПОДПИСКА НА НОВОСТИ</h4>
-                    <p class="footer__text footer__text--subscribe">Получайте новости и актуальные предложения первыми.</p>
+                    <h4 class="footer__title" data-i18n="footer_sub">ПОДПИСКА НА НОВОСТИ</h4>
+                    <p class="footer__text footer__text--subscribe" data-i18n="footer_sub_text">Получайте новости и актуальные предложения первыми.</p>
                     <form class="footer__form">
-                        <input type="email" placeholder="Ваш e-mail" required class="footer__input">
-                        <button type="submit" class="btn btn--primary footer__btn">ПОДПИСАТЬСЯ</button>
+                        <input type="email" placeholder="Ваш e-mail" data-i18n-ph="footer_email_ph" required class="footer__input">
+                        <button type="submit" class="btn btn--primary footer__btn" data-i18n="footer_sub_btn">ПОДПИСАТЬСЯ</button>
                     </form>
                 </div>
 
             </div>
 
             <div class="footer__bottom">
-                <p>&copy; 2024 Mustafe Viza. Все права защищены.</p>
+                <p><span data-i18n="footer_copy">© 2024 Mustafo Viza. Все права защищены.</span></p>
             </div>
         </div>
     </footer>
@@ -477,6 +482,7 @@
     <div class="morph-overlay" id="morph-overlay">
         <div class="morph-overlay__img" id="morph-overlay-img"></div>
     </div>
+    <script src="i18n.js"></script>
     <script src="script.js"></script>
     <script>
         sessionStorage.setItem('visited', '1');
