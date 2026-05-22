@@ -523,3 +523,16 @@
 .country-nav .nav__item.dropdown.open .drop-icon {
     transform: rotate(180deg);
 }
+
+/* =========================================
+   СТРАНЫ — только лого иконка, без текста
+   ========================================= */
+.header--country .logo {
+    display: flex;
+    align-items: center;
+}
+.header--country .logo__img-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+}
