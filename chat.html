@@ -361,6 +361,9 @@
 <!-- WELCOME SCREEN -->
 <div id="welcome">
     <h1 class="welcome__title">Что вас интересует?</h1>
+    <div id="manager-hint" style="display:none; background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3); border-radius:12px; padding:12px 18px; font-size:12px; color:#fca5a5; margin-bottom:16px; max-width:500px; text-align:center;">
+        ⚠️ Менеджер ещё не подключён к боту. Пожалуйста, попробуйте позже.
+    </div>
 
     <!-- Имя -->
     <div id="name-step">
@@ -403,6 +406,8 @@ const TOKEN = '8342368418:AAHGPeuT7QKVQPr_2643DqyRpxQk_ELFgSY';
 const API   = `https://api.telegram.org/bot${TOKEN}`;
 
 let clientName    = '';
+// ВАЖНО: менеджер должен написать /start боту один раз
+// После этого chat_id сохранится автоматически
 let managerChatId = null;
 let lastUpdateId  = 0;
 let nameConfirmed = false;
@@ -441,29 +446,43 @@ function confirmName() {
 /* ── get manager chat_id ── */
 async function fetchManagerChatId() {
     try {
-        const res  = await fetch(`${API}/getUpdates?limit=50`);
+        const res  = await fetch(`${API}/getUpdates?limit=100&allowed_updates=["message"]`);
         const data = await res.json();
-        if (data.ok) {
+        if (data.ok && data.result.length > 0) {
+            // Take the LAST message's chat_id (most recent manager)
             for (const upd of data.result) {
                 if (upd.update_id > lastUpdateId) lastUpdateId = upd.update_id;
-                if (upd.message && !managerChatId) managerChatId = upd.message.chat.id;
+                if (upd.message) {
+                    managerChatId = upd.message.chat.id; // keep updating to get latest
+                }
             }
+            console.log('Manager chat_id found:', managerChatId);
+        } else {
+            console.warn('No updates found. Manager must send /start to the bot first!');
+            // Show hint to user
+            const hint = document.getElementById('manager-hint');
+            if (hint) hint.style.display = 'block';
         }
-    } catch(e) {}
+    } catch(e) { console.error('fetchManagerChatId error:', e); }
 }
 
 /* ── send to TG ── */
 async function tgSend(text) {
     if (!managerChatId) await fetchManagerChatId();
-    if (!managerChatId) return;
+    if (!managerChatId) {
+        console.error('Cannot send: manager chat_id unknown. Manager must /start the bot.');
+        return;
+    }
     myTexts.add(text);
     try {
-        await fetch(`${API}/sendMessage`, {
+        const resp = await fetch(`${API}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ chat_id: managerChatId, text, parse_mode: 'Markdown' })
         });
-    } catch(e) {}
+        const result = await resp.json();
+        if (!result.ok) console.error('TG send error:', result.description);
+    } catch(e) { console.error('tgSend error:', e); }
 }
 
 /* ── switch to chat view ── */
