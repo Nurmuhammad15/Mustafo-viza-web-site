@@ -318,3 +318,33 @@
     .visa-grid { grid-template-columns: 1fr; }
     .country-hero__title { font-size: 48px; }
 }
+
+/* === FIXES === */
+/* Title overflow fix */
+.country-hero__title {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: 100%;
+    padding: 0 10px;
+}
+
+@media (max-width: 768px) {
+    .country-hero__title {
+        font-size: clamp(36px, 12vw, 60px);
+        letter-spacing: 2px;
+    }
+    .country-hero__flag {
+        font-size: 52px;
+    }
+    /* Country header: only logo + back btn */
+    .country-page-body .header__container {
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 400px) {
+    .country-hero__title {
+        font-size: 32px;
+        letter-spacing: 1px;
+    }
+}
