@@ -406,12 +406,11 @@ const TOKEN = '8708390478:AAFinj7p2jhnn2b4A2k60ZwgywDg83kuaJI';
 const API   = `https://api.telegram.org/bot${TOKEN}`;
 
 let clientName    = '';
-// ВАЖНО: менеджер должен написать /start боту один раз
-// После этого chat_id сохранится автоматически
 let managerChatId = null;
 let lastUpdateId  = 0;
 let nameConfirmed = false;
-const myTexts     = new Set();
+let firstSent     = false; // защита от двойной отправки
+const myMsgIds    = new Set(); // id отправленных нами сообщений
 
 /* ── helpers ── */
 function nowTime() {
@@ -429,17 +428,12 @@ function confirmName() {
     if (!val) { inp.style.borderColor='#ef4444'; setTimeout(()=>inp.style.borderColor='',1200); return; }
     clientName    = val;
     nameConfirmed = true;
-
-    // Enable input
     const wi = document.getElementById('welcome-input');
     wi.disabled = false;
     wi.focus();
-
-    // Hide name step
     document.getElementById('name-step').style.opacity = '0.4';
     document.getElementById('name-step').style.pointerEvents = 'none';
     document.querySelector('.name-label').textContent = `Привет, ${clientName}! Задайте ваш вопрос 👇`;
-
     fetchManagerChatId();
 }
 
@@ -449,45 +443,44 @@ async function fetchManagerChatId() {
         const res  = await fetch(`${API}/getUpdates?limit=100&allowed_updates=["message"]`);
         const data = await res.json();
         if (data.ok && data.result.length > 0) {
-            // Take the LAST message's chat_id (most recent manager)
             for (const upd of data.result) {
                 if (upd.update_id > lastUpdateId) lastUpdateId = upd.update_id;
-                if (upd.message) {
-                    managerChatId = upd.message.chat.id; // keep updating to get latest
-                }
+                if (upd.message) managerChatId = upd.message.chat.id;
             }
-            console.log('Manager chat_id found:', managerChatId);
         } else {
-            console.warn('No updates found. Manager must send /start to the bot first!');
-            // Show hint to user
             const hint = document.getElementById('manager-hint');
             if (hint) hint.style.display = 'block';
         }
     } catch(e) { console.error('fetchManagerChatId error:', e); }
 }
 
-/* ── send to TG ── */
-async function tgSend(text) {
+/* ── send to TG with inline reply button ── */
+async function tgSend(text, withReplyBtn) {
     if (!managerChatId) await fetchManagerChatId();
-    if (!managerChatId) {
-        console.error('Cannot send: manager chat_id unknown. Manager must /start the bot.');
-        return;
-    }
-    myTexts.add(text);
+    if (!managerChatId) return null;
     try {
+        const body = { chat_id: managerChatId, text, parse_mode: 'Markdown' };
+        if (withReplyBtn) {
+            body.reply_markup = {
+                inline_keyboard: [[
+                    { text: '✏️ Ответить клиенту', callback_data: 'reply_client' }
+                ]]
+            };
+        }
         const resp = await fetch(`${API}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: managerChatId, text, parse_mode: 'Markdown' })
+            body: JSON.stringify(body)
         });
         const result = await resp.json();
-        if (!result.ok) console.error('TG send error:', result.description);
-    } catch(e) { console.error('tgSend error:', e); }
+        if (result.ok) return result.result.message_id;
+        return null;
+    } catch(e) { return null; }
 }
 
 /* ── switch to chat view ── */
 function openChat() {
-    document.getElementById('welcome').style.display     = 'none';
+    document.getElementById('welcome').style.display = 'none';
     const cs = document.getElementById('chat-screen');
     cs.style.display = 'flex';
 }
@@ -496,68 +489,55 @@ function openChat() {
 function addMsg(type, text) {
     const container = document.getElementById('messages');
     const typing    = document.getElementById('typing');
-
     const row = document.createElement('div');
     row.className = `msg-row msg-row--${type}`;
-
     const avatar = document.createElement('div');
     avatar.className = `msg-avatar msg-avatar--${type}`;
     avatar.textContent = type === 'manager' ? '🛂' : '👤';
-
     const body = document.createElement('div');
     body.className = 'msg-body';
-
     const name = document.createElement('div');
     name.className = 'msg-name';
     name.textContent = type === 'manager' ? 'Менеджер' : clientName;
     body.appendChild(name);
-
     const bubble = document.createElement('div');
     bubble.className = 'msg-bubble';
     bubble.textContent = text;
     body.appendChild(bubble);
-
     const time = document.createElement('div');
     time.className = 'msg-time';
     time.textContent = nowTime();
     body.appendChild(time);
-
     if (type === 'user') { row.appendChild(body); row.appendChild(avatar); }
     else                  { row.appendChild(avatar); row.appendChild(body); }
-
     container.insertBefore(row, typing);
     scrollBottom();
 }
 
 /* ── send first message (welcome screen) ── */
 async function sendFirst() {
+    if (firstSent) return; // защита от двойного вызова
     if (!nameConfirmed) { document.getElementById('client-name').focus(); return; }
     const inp  = document.getElementById('welcome-input');
     const text = inp.value.trim();
     if (!text) return;
+    firstSent = true;
     inp.value = '';
-
     openChat();
+    // Уведомление менеджеру
+    const intro = `🔔 *Yangi konsultatsiya*
 
-    // Intro notification
-    const intro = `🔔 *Yangi konsultatsiya*\n\n👤 Mijoz: *${clientName}*\n🕐 ${nowTime()}`;
-    await tgSend(intro);
-
-    // User message
+👤 Mijoz: *${clientName}*
+🕐 ${nowTime()}`;
+    await tgSend(intro, false);
+    // Сообщение клиента с кнопкой ответа
     addMsg('user', text);
-    const tgText = `💬 *${clientName}*:\n\n${text}`;
-    await tgSend(tgText);
+    const tgText = `💬 *${clientName}*:
+
+${text}`;
+    await tgSend(tgText, true);
     showTyping();
     startPolling();
-}
-
-/* ── quick suggestions ── */
-function quickQ(q) {
-    if (!nameConfirmed) { document.getElementById('client-name').focus(); return; }
-    const inp = document.getElementById('welcome-input');
-    inp.value = q;
-    updateSendBtn();
-    inp.focus();
 }
 
 /* ── send from chat screen ── */
@@ -567,10 +547,11 @@ async function sendMsg() {
     if (!text) return;
     inp.value = '';
     inp.style.height = 'auto';
-
     addMsg('user', text);
-    const tgText = `💬 *${clientName}*:\n\n${text}`;
-    await tgSend(tgText);
+    const tgText = `💬 *${clientName}*:
+
+${text}`;
+    await tgSend(tgText, true);
     showTyping();
 }
 
@@ -583,13 +564,37 @@ function startPolling() {
             if (!data.ok) return;
             for (const upd of data.result) {
                 lastUpdateId = upd.update_id;
+                // Ответ менеджера через force_reply или обычное сообщение
                 if (upd.message) {
-                    const { text='', chat } = upd.message;
+                    const { text='', chat, message_id } = upd.message;
                     if (!managerChatId) managerChatId = chat.id;
-                    if (text && !myTexts.has(text) && !text.startsWith('🔔') && !text.startsWith('💬')) {
+                    // Показываем только ответы менеджера (не уведомления и не сообщения клиента)
+                    if (text && !text.startsWith('🔔') && !text.startsWith('💬') && !text.startsWith('/')) {
                         hideTyping();
                         addMsg('manager', text);
                     }
+                }
+                // Обработка нажатия inline кнопки
+                if (upd.callback_query && upd.callback_query.data === 'reply_client') {
+                    const cbId = upd.callback_query.id;
+                    const fromChatId = upd.callback_query.message.chat.id;
+                    // Ответить на callback чтобы убрать "часики"
+                    await fetch(`${API}/answerCallbackQuery`, {
+                        method: 'POST',
+                        headers: {'Content-Type':'application/json'},
+                        body: JSON.stringify({ callback_query_id: cbId })
+                    });
+                    // Попросить менеджера написать ответ через ForceReply
+                    await fetch(`${API}/sendMessage`, {
+                        method: 'POST',
+                        headers: {'Content-Type':'application/json'},
+                        body: JSON.stringify({
+                            chat_id: fromChatId,
+                            text: `✏️ Напишите ответ клиенту *${clientName}*:`,
+                            parse_mode: 'Markdown',
+                            reply_markup: { force_reply: true, selective: true }
+                        })
+                    });
                 }
             }
         } catch(e) {}
@@ -613,6 +618,11 @@ document.addEventListener('DOMContentLoaded', () => {
     wi.addEventListener('input', () => { autoResize(wi); updateSendBtn(); });
     wi.addEventListener('keydown', e => { if (e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); sendFirst(); }});
 
+    // Убираем onclick с кнопки отправки чтобы не было двойного вызова
+    const wsBtn = document.getElementById('welcome-send');
+    wsBtn.removeAttribute('onclick');
+    wsBtn.addEventListener('click', sendFirst);
+
     const ci = document.getElementById('chat-input');
     ci.addEventListener('input', () => autoResize(ci));
     ci.addEventListener('keydown', e => { if (e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); sendMsg(); }});
@@ -621,4 +631,3 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 </body>
-</html>
