@@ -109,7 +109,7 @@
             background: #1e1e1e;
             border: 1.5px solid rgba(255,255,255,0.1);
             border-radius: 28px;
-            padding: 18px 60px 18px 52px;
+            padding: 18px 60px 18px 22px;
             font-family: 'Montserrat', sans-serif;
             font-size: 15px;
             color: #fff;
@@ -126,38 +126,21 @@
         }
         .input-wrap textarea::placeholder { color: rgba(255,255,255,0.3); font-size: 14px; }
 
-        .input-wrap__attach {
-            position: absolute;
-            left: 16px;
-            bottom: 16px;
-            color: rgba(255,255,255,0.35);
-            font-size: 16px;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .input-wrap__attach:hover { color: rgba(255,255,255,0.7); }
-
         .input-wrap__send {
             position: absolute;
             right: 10px;
             bottom: 10px;
-            width: 38px; height: 38px;
-            background: #fff;
+            width: 36px; height: 36px;
+            background: #eea91a;
             border: none;
             border-radius: 50%;
             color: #0d0d0d;
             font-size: 14px;
             cursor: pointer;
             display: flex; align-items: center; justify-content: center;
-            transition: background 0.2s, transform 0.15s, opacity 0.2s;
-            opacity: 0.3;
+            transition: background 0.2s, transform 0.15s;
         }
-        .input-wrap__send.active {
-            opacity: 1;
-            background: #eea91a;
-            color: #0d0d0d;
-        }
-        .input-wrap__send.active:hover { transform: scale(1.08); }
+        .input-wrap__send:hover { background: #f5c430; transform: scale(1.08); }
 
         /* Name input step */
         #name-step {
@@ -390,19 +373,10 @@
 
     <!-- Input -->
     <div class="input-wrap">
-        <i class="fa-solid fa-plus input-wrap__attach"></i>
         <textarea id="welcome-input" placeholder="Напишите вопрос..." rows="1" disabled></textarea>
         <button class="input-wrap__send" id="welcome-send" onclick="sendFirst()">
             <i class="fa-solid fa-arrow-up"></i>
         </button>
-    </div>
-
-    <!-- Быстрые вопросы -->
-    <div class="suggestions">
-        <button class="sugg-btn" onclick="quickQ('Какие документы нужны для визы?')">📄 Какие документы нужны?</button>
-        <button class="sugg-btn" onclick="quickQ('Сколько стоит оформление визы?')">💰 Сколько стоит?</button>
-        <button class="sugg-btn" onclick="quickQ('Сколько времени занимает оформление?')">⏳ Сколько времени?</button>
-        <button class="sugg-btn" onclick="quickQ('Какие страны вы помогаете оформить?')">🌍 Какие страны?</button>
     </div>
 </div>
 
@@ -416,7 +390,6 @@
     </div>
     <div class="chat-footer">
         <div class="input-wrap">
-            <i class="fa-solid fa-plus input-wrap__attach"></i>
             <textarea id="chat-input" placeholder="Напишите сообщение..." rows="1"></textarea>
             <button class="input-wrap__send active" id="chat-send" onclick="sendMsg()">
                 <i class="fa-solid fa-arrow-up"></i>
