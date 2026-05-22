@@ -8,135 +8,232 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
             font-family: 'Montserrat', sans-serif;
-            background: #06162e;
+            background: #0d0d0d url('img_chat_bg.jpg') center center / cover no-repeat fixed;
             color: #fff;
             height: 100dvh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
         }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.70);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .topbar, #welcome, #chat-screen { position: relative; z-index: 1; }
 
-        /* HEADER */
-        .chat-header {
-            background: rgba(6,22,46,0.98);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            padding: 12px 16px;
+        /* ── TOP BAR ── */
+        .topbar {
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: space-between;
+            padding: 14px 20px;
             flex-shrink: 0;
         }
-        .chat-header__back {
-            color: rgba(255,255,255,0.7);
-            font-size: 18px;
+        .topbar__back {
+            color: rgba(255,255,255,0.5);
+            font-size: 15px;
             text-decoration: none;
-            width: 36px; height: 36px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 8px;
-            transition: color 0.2s, background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: color 0.2s;
+            font-weight: 500;
         }
-        .chat-header__back:hover { color: #eea91a; background: rgba(255,255,255,0.06); }
-        .chat-header__avatar {
-            width: 40px; height: 40px;
-            background: linear-gradient(135deg, #eea91a, #f5b82e);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 18px;
-            flex-shrink: 0;
+        .topbar__back:hover { color: #eea91a; }
+        .topbar__logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            text-decoration: none;
         }
-        .chat-header__info { flex: 1; }
-        .chat-header__name {
+        .topbar__logo img {
+            width: 30px; height: 30px;
+            border-radius: 7px;
+        }
+        .topbar__logo-name {
             font-size: 13px;
             font-weight: 700;
-            color: #fff;
-            line-height: 1.2;
+            color: rgba(255,255,255,0.85);
+            letter-spacing: 0.5px;
         }
-        .chat-header__status {
-            font-size: 11px;
-            color: #4ade80;
+        .topbar__status {
             display: flex;
             align-items: center;
-            gap: 4px;
-            margin-top: 2px;
+            gap: 6px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
         }
-        .chat-header__status::before {
-            content: '';
-            width: 6px; height: 6px;
+        .topbar__dot {
+            width: 8px; height: 8px;
             background: #4ade80;
             border-radius: 50%;
-            flex-shrink: 0;
+            box-shadow: 0 0 6px #4ade80;
         }
 
-        /* NAME SCREEN */
-        #name-screen {
+        /* ── WELCOME SCREEN ── */
+        #welcome {
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 32px 24px;
+            padding: 0 20px 40px;
             text-align: center;
-            overflow-y: auto;
+            gap: 0;
         }
-        .ns-icon {
-            width: 80px; height: 80px;
-            background: rgba(238,169,26,0.1);
-            border: 2px solid rgba(238,169,26,0.25);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 34px;
-            margin-bottom: 22px;
-        }
-        .ns-title {
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 10px;
+        .welcome__title {
+            font-size: clamp(22px, 5vw, 34px);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 48px;
             line-height: 1.3;
+            letter-spacing: -0.5px;
         }
-        .ns-sub {
-            font-size: 13px;
-            color: rgba(255,255,255,0.45);
-            margin-bottom: 30px;
-            line-height: 1.6;
-            max-width: 300px;
-        }
-        .ns-input {
+        .welcome__title span { color: #eea91a; }
+
+        /* Input wrapper */
+        .input-wrap {
             width: 100%;
-            max-width: 340px;
-            background: rgba(255,255,255,0.06);
-            border: 1.5px solid rgba(255,255,255,0.12);
-            border-radius: 12px;
-            padding: 14px 16px;
+            max-width: 680px;
+            position: relative;
+        }
+        .input-wrap textarea {
+            width: 100%;
+            background: #1e1e1e;
+            border: 1.5px solid rgba(255,255,255,0.1);
+            border-radius: 28px;
+            padding: 18px 60px 18px 52px;
             font-family: 'Montserrat', sans-serif;
             font-size: 15px;
             color: #fff;
             outline: none;
-            margin-bottom: 12px;
+            resize: none;
+            line-height: 1.5;
+            max-height: 160px;
+            min-height: 58px;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .input-wrap textarea:focus {
+            border-color: rgba(238,169,26,0.5);
+            background: #222;
+        }
+        .input-wrap textarea::placeholder { color: rgba(255,255,255,0.3); font-size: 14px; }
+
+        .input-wrap__attach {
+            position: absolute;
+            left: 16px;
+            bottom: 16px;
+            color: rgba(255,255,255,0.35);
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .input-wrap__attach:hover { color: rgba(255,255,255,0.7); }
+
+        .input-wrap__send {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            width: 38px; height: 38px;
+            background: #fff;
+            border: none;
+            border-radius: 50%;
+            color: #0d0d0d;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s, transform 0.15s, opacity 0.2s;
+            opacity: 0.3;
+        }
+        .input-wrap__send.active {
+            opacity: 1;
+            background: #eea91a;
+            color: #0d0d0d;
+        }
+        .input-wrap__send.active:hover { transform: scale(1.08); }
+
+        /* Name input step */
+        #name-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .name-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 2px;
+        }
+        .name-input-row {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            max-width: 400px;
+        }
+        .name-inp {
+            flex: 1;
+            background: #1e1e1e;
+            border: 1.5px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            padding: 12px 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: #fff;
+            outline: none;
             transition: border-color 0.2s;
         }
-        .ns-input:focus { border-color: #eea91a; }
-        .ns-input::placeholder { color: rgba(255,255,255,0.28); }
-        .ns-btn {
-            width: 100%;
-            max-width: 340px;
+        .name-inp:focus { border-color: rgba(238,169,26,0.5); }
+        .name-inp::placeholder { color: rgba(255,255,255,0.3); }
+        .name-ok-btn {
             background: #eea91a;
-            color: #06162e;
+            color: #0d0d0d;
             border: none;
-            border-radius: 12px;
-            padding: 14px;
+            border-radius: 14px;
+            padding: 12px 20px;
             font-family: 'Montserrat', sans-serif;
             font-size: 13px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
+            font-weight: 700;
             cursor: pointer;
-            transition: background 0.2s, transform 0.15s;
+            white-space: nowrap;
+            transition: background 0.2s;
         }
-        .ns-btn:hover { background: #f5b82e; transform: scale(1.02); }
+        .name-ok-btn:hover { background: #f5c430; }
 
-        /* CHAT SCREEN */
+        /* Suggestions */
+        .suggestions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 16px;
+            max-width: 680px;
+        }
+        .sugg-btn {
+            background: #1e1e1e;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 9px 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            color: rgba(255,255,255,0.65);
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .sugg-btn:hover {
+            background: #2a2a2a;
+            color: #fff;
+            border-color: rgba(238,169,26,0.4);
+        }
+
+        /* ── CHAT SCREEN ── */
         #chat-screen {
             display: none;
             flex: 1;
@@ -144,285 +241,360 @@
             min-height: 0;
         }
 
-        .chat-messages {
+        .messages {
             flex: 1;
             overflow-y: auto;
-            padding: 16px 14px 10px;
+            padding: 20px 16px 10px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 20px;
             scroll-behavior: smooth;
         }
+        .messages::-webkit-scrollbar { width: 4px; }
+        .messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
 
-        .chat-day-label {
-            text-align: center;
-            font-size: 11px;
-            color: rgba(255,255,255,0.3);
-            padding: 4px 0 8px;
-        }
-
-        .msg {
+        /* Message row */
+        .msg-row {
             display: flex;
-            flex-direction: column;
-            max-width: 78%;
-            gap: 3px;
+            gap: 12px;
+            max-width: 780px;
+            width: 100%;
         }
-        .msg--user { align-self: flex-end; align-items: flex-end; }
-        .msg--manager { align-self: flex-start; align-items: flex-start; }
+        .msg-row--user { align-self: flex-end; flex-direction: row-reverse; }
+        .msg-row--manager { align-self: flex-start; }
 
-        .msg__name {
-            font-size: 10px;
+        .msg-avatar {
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px;
+            margin-top: 2px;
+        }
+        .msg-avatar--manager {
+            background: linear-gradient(135deg, #eea91a, #c47d00);
+        }
+        .msg-avatar--user {
+            background: #2a2a2a;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .msg-body { display: flex; flex-direction: column; gap: 4px; }
+
+        .msg-name {
+            font-size: 11px;
             font-weight: 700;
-            color: #eea91a;
+            color: rgba(255,255,255,0.4);
             padding: 0 4px;
         }
-        .msg__bubble {
-            padding: 10px 14px;
-            border-radius: 18px;
+        .msg-row--user .msg-name { text-align: right; color: rgba(238,169,26,0.6); }
+
+        .msg-bubble {
+            padding: 12px 16px;
+            border-radius: 20px;
             font-size: 14px;
-            line-height: 1.5;
+            line-height: 1.6;
             word-break: break-word;
             white-space: pre-wrap;
+            max-width: 520px;
         }
-        .msg--user .msg__bubble {
-            background: #eea91a;
-            color: #06162e;
-            border-bottom-right-radius: 4px;
-            font-weight: 600;
+        .msg-row--manager .msg-bubble {
+            background: #1e1e1e;
+            color: #e8e8e8;
+            border-bottom-left-radius: 5px;
         }
-        .msg--manager .msg__bubble {
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.09);
-            color: #eee;
-            border-bottom-left-radius: 4px;
+        .msg-row--user .msg-bubble {
+            background: #2a2a2a;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #fff;
+            border-bottom-right-radius: 5px;
         }
-        .msg__time {
+        .msg-time {
             font-size: 10px;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.22);
             padding: 0 4px;
         }
 
-        /* Typing dots */
-        .typing-wrap {
+        /* Typing */
+        .typing-row {
             display: none;
             align-self: flex-start;
+            gap: 12px;
+            align-items: center;
         }
         .typing-dots {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            padding: 12px 16px;
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.09);
-            border-radius: 18px;
-            border-bottom-left-radius: 4px;
+            display: flex; gap: 4px; align-items: center;
+            background: #1e1e1e;
+            padding: 13px 18px;
+            border-radius: 20px;
+            border-bottom-left-radius: 5px;
         }
         .typing-dots span {
             width: 6px; height: 6px;
-            background: rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.35);
             border-radius: 50%;
-            animation: dotAnim 1.2s infinite;
+            animation: td 1.2s infinite;
         }
-        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes dotAnim {
-            0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
-            30% { transform: translateY(-5px); opacity: 1; }
+        .typing-dots span:nth-child(2) { animation-delay: .2s; }
+        .typing-dots span:nth-child(3) { animation-delay: .4s; }
+        @keyframes td {
+            0%,60%,100% { transform: translateY(0); opacity:.3; }
+            30% { transform: translateY(-5px); opacity:1; }
         }
 
-        /* INPUT */
+        /* Bottom input in chat */
         .chat-footer {
-            padding: 10px 12px;
-            background: rgba(6,22,46,0.98);
-            border-top: 1px solid rgba(255,255,255,0.07);
-            display: flex;
-            gap: 10px;
-            align-items: flex-end;
+            padding: 12px 16px 16px;
             flex-shrink: 0;
         }
-        .chat-input {
-            flex: 1;
-            background: rgba(255,255,255,0.06);
-            border: 1.5px solid rgba(255,255,255,0.1);
-            border-radius: 22px;
-            padding: 11px 16px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            color: #fff;
-            outline: none;
-            resize: none;
-            max-height: 110px;
-            line-height: 1.45;
-            transition: border-color 0.2s;
+        .chat-footer .input-wrap { margin: 0 auto; }
+
+        /* Centered layout for desktop */
+        @media (min-width: 700px) {
+            .messages { padding: 24px 40px 10px; align-items: center; }
+            .msg-row { max-width: 680px; }
+            .chat-footer { padding: 12px 40px 20px; }
+            #welcome { padding-bottom: 60px; }
         }
-        .chat-input:focus { border-color: #eea91a; }
-        .chat-input::placeholder { color: rgba(255,255,255,0.28); }
-        .send-btn {
-            width: 44px; height: 44px;
-            background: #eea91a;
-            border: none;
-            border-radius: 50%;
-            color: #06162e;
-            font-size: 15px;
-            cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
-            transition: background 0.2s, transform 0.15s;
-        }
-        .send-btn:hover { background: #f5b82e; transform: scale(1.06); }
-        .send-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
     </style>
 </head>
 <body>
 
-<header class="chat-header">
-    <a href="javascript:history.back()" class="chat-header__back"><i class="fa-solid fa-arrow-left"></i></a>
-    <div class="chat-header__avatar">🛂</div>
-    <div class="chat-header__info">
-        <div class="chat-header__name">Mustafo Viza — Менеджер</div>
-        <div class="chat-header__status">Онлайн</div>
+<!-- TOP BAR -->
+<div class="topbar">
+    <a href="javascript:history.back()" class="topbar__back">
+        <i class="fa-solid fa-arrow-left"></i> Назад
+    </a>
+    <a href="index.html" class="topbar__logo">
+        <img src="logo.png" alt="logo">
+        <span class="topbar__logo-name">MUSTAFO VIZA</span>
+    </a>
+    <div class="topbar__status">
+        <div class="topbar__dot"></div>
+        Онлайн
     </div>
-</header>
-
-<!-- Экран 1: ввод имени -->
-<div id="name-screen">
-    <div class="ns-icon">💬</div>
-    <h2 class="ns-title">Начать консультацию</h2>
-    <p class="ns-sub">Введите ваше имя — менеджер ответит вам в ближайшее время</p>
-    <input type="text" id="client-name" class="ns-input" placeholder="Ваше имя" maxlength="40" autocomplete="off">
-    <button class="ns-btn" id="start-btn" onclick="startChat()">Начать чат →</button>
 </div>
 
-<!-- Экран 2: чат -->
+<!-- WELCOME SCREEN -->
+<div id="welcome">
+    <h1 class="welcome__title">Что вас интересует?</h1>
+
+    <!-- Имя -->
+    <div id="name-step">
+        <div class="name-label">Введите ваше имя, чтобы начать</div>
+        <div class="name-input-row">
+            <input type="text" id="client-name" class="name-inp" placeholder="Ваше имя" maxlength="40" autocomplete="off">
+            <button class="name-ok-btn" onclick="confirmName()">Готово</button>
+        </div>
+    </div>
+
+    <!-- Input -->
+    <div class="input-wrap">
+        <i class="fa-solid fa-plus input-wrap__attach"></i>
+        <textarea id="welcome-input" placeholder="Напишите вопрос..." rows="1" disabled></textarea>
+        <button class="input-wrap__send" id="welcome-send" onclick="sendFirst()">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- Быстрые вопросы -->
+    <div class="suggestions">
+        <button class="sugg-btn" onclick="quickQ('Какие документы нужны для визы?')">📄 Какие документы нужны?</button>
+        <button class="sugg-btn" onclick="quickQ('Сколько стоит оформление визы?')">💰 Сколько стоит?</button>
+        <button class="sugg-btn" onclick="quickQ('Сколько времени занимает оформление?')">⏳ Сколько времени?</button>
+        <button class="sugg-btn" onclick="quickQ('Какие страны вы помогаете оформить?')">🌍 Какие страны?</button>
+    </div>
+</div>
+
+<!-- CHAT SCREEN -->
 <div id="chat-screen">
-    <div class="chat-messages" id="messages">
-        <div class="chat-day-label">Сегодня</div>
-        <div class="typing-wrap" id="typing">
+    <div class="messages" id="messages">
+        <div class="typing-row" id="typing">
+            <div class="msg-avatar msg-avatar--manager">🛂</div>
             <div class="typing-dots"><span></span><span></span><span></span></div>
         </div>
     </div>
     <div class="chat-footer">
-        <textarea class="chat-input" id="msg-input" placeholder="Напишите сообщение..." rows="1"></textarea>
-        <button class="send-btn" id="send-btn" onclick="sendMsg()"><i class="fa-solid fa-paper-plane"></i></button>
+        <div class="input-wrap">
+            <i class="fa-solid fa-plus input-wrap__attach"></i>
+            <textarea id="chat-input" placeholder="Напишите сообщение..." rows="1"></textarea>
+            <button class="input-wrap__send active" id="chat-send" onclick="sendMsg()">
+                <i class="fa-solid fa-arrow-up"></i>
+            </button>
+        </div>
     </div>
 </div>
 
 <script>
 const TOKEN = '8342368418:AAHGPeuT7QKVQPr_2643DqyRpxQk_ELFgSY';
-const API = `https://api.telegram.org/bot${TOKEN}`;
+const API   = `https://api.telegram.org/bot${TOKEN}`;
 
-let clientName = '';
-let managerChatId = null;   // будет найден из getUpdates
-let lastUpdateId = 0;
-let polling = null;
-// Сообщения которые мы сами отправили — не показываем как ответ менеджера
-const myMsgTexts = new Set();
+let clientName    = '';
+let managerChatId = null;
+let lastUpdateId  = 0;
+let nameConfirmed = false;
+const myTexts     = new Set();
 
+/* ── helpers ── */
 function nowTime() {
     const d = new Date();
     return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
 }
+function showTyping()  { const t = document.getElementById('typing'); t.style.display='flex'; scrollBottom(); }
+function hideTyping()  { document.getElementById('typing').style.display='none'; }
+function scrollBottom(){ const m=document.getElementById('messages'); if(m) m.scrollTop=99999; }
 
-async function startChat() {
+/* ── name confirm ── */
+function confirmName() {
     const inp = document.getElementById('client-name');
-    clientName = inp.value.trim();
-    if (!clientName) {
-        inp.style.borderColor = '#ef4444';
-        setTimeout(() => inp.style.borderColor = '', 1200);
-        return;
-    }
+    const val = inp.value.trim();
+    if (!val) { inp.style.borderColor='#ef4444'; setTimeout(()=>inp.style.borderColor='',1200); return; }
+    clientName    = val;
+    nameConfirmed = true;
 
-    document.getElementById('name-screen').style.display = 'none';
-    const cs = document.getElementById('chat-screen');
-    cs.style.display = 'flex';
+    // Enable input
+    const wi = document.getElementById('welcome-input');
+    wi.disabled = false;
+    wi.focus();
 
-    // Сначала получаем chat_id менеджера из getUpdates
-    await fetchManagerChatId();
+    // Hide name step
+    document.getElementById('name-step').style.opacity = '0.4';
+    document.getElementById('name-step').style.pointerEvents = 'none';
+    document.querySelector('.name-label').textContent = `Привет, ${clientName}! Задайте ваш вопрос 👇`;
 
-    // Отправляем уведомление менеджеру
-    const intro = `🔔 *Yangi konsultatsiya so'rovi*\n\n👤 Mijoz ismi: *${clientName}*\n🕐 ${nowTime()}\n\n_Mijoz saytdan chat boshladi. Quyida uning savollari keladi._`;
-    await tgSend(intro);
-
-    // Показываем приветствие от менеджера с небольшой задержкой
-    showTyping();
-    setTimeout(() => {
-        hideTyping();
-        addMsg('manager', `Assalomu alaykum, ${clientName}! 👋\n\nMen Mustafo Viza menejeri. Savol va murojatingizni yozing — tez orada javob beraman.`);
-    }, 1400);
-
-    // Начинаем получать ответы менеджера
-    startPolling();
+    fetchManagerChatId();
 }
 
+/* ── get manager chat_id ── */
 async function fetchManagerChatId() {
     try {
-        const res = await fetch(`${API}/getUpdates?limit=50`);
+        const res  = await fetch(`${API}/getUpdates?limit=50`);
         const data = await res.json();
-        if (data.ok && data.result.length > 0) {
+        if (data.ok) {
             for (const upd of data.result) {
                 if (upd.update_id > lastUpdateId) lastUpdateId = upd.update_id;
-                if (upd.message && !managerChatId) {
-                    managerChatId = upd.message.chat.id;
-                }
+                if (upd.message && !managerChatId) managerChatId = upd.message.chat.id;
             }
         }
-    } catch(e) { console.error('getUpdates error:', e); }
+    } catch(e) {}
 }
 
+/* ── send to TG ── */
 async function tgSend(text) {
+    if (!managerChatId) await fetchManagerChatId();
     if (!managerChatId) return;
-    myMsgTexts.add(text);
+    myTexts.add(text);
     try {
         await fetch(`${API}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: managerChatId,
-                text: text,
-                parse_mode: 'Markdown'
-            })
+            body: JSON.stringify({ chat_id: managerChatId, text, parse_mode: 'Markdown' })
         });
-    } catch(e) { console.error('send error:', e); }
+    } catch(e) {}
 }
 
-async function sendMsg() {
-    const inp = document.getElementById('msg-input');
+/* ── switch to chat view ── */
+function openChat() {
+    document.getElementById('welcome').style.display     = 'none';
+    const cs = document.getElementById('chat-screen');
+    cs.style.display = 'flex';
+}
+
+/* ── add message bubble ── */
+function addMsg(type, text) {
+    const container = document.getElementById('messages');
+    const typing    = document.getElementById('typing');
+
+    const row = document.createElement('div');
+    row.className = `msg-row msg-row--${type}`;
+
+    const avatar = document.createElement('div');
+    avatar.className = `msg-avatar msg-avatar--${type}`;
+    avatar.textContent = type === 'manager' ? '🛂' : '👤';
+
+    const body = document.createElement('div');
+    body.className = 'msg-body';
+
+    const name = document.createElement('div');
+    name.className = 'msg-name';
+    name.textContent = type === 'manager' ? 'Менеджер' : clientName;
+    body.appendChild(name);
+
+    const bubble = document.createElement('div');
+    bubble.className = 'msg-bubble';
+    bubble.textContent = text;
+    body.appendChild(bubble);
+
+    const time = document.createElement('div');
+    time.className = 'msg-time';
+    time.textContent = nowTime();
+    body.appendChild(time);
+
+    if (type === 'user') { row.appendChild(body); row.appendChild(avatar); }
+    else                  { row.appendChild(avatar); row.appendChild(body); }
+
+    container.insertBefore(row, typing);
+    scrollBottom();
+}
+
+/* ── send first message (welcome screen) ── */
+async function sendFirst() {
+    if (!nameConfirmed) { document.getElementById('client-name').focus(); return; }
+    const inp  = document.getElementById('welcome-input');
     const text = inp.value.trim();
     if (!text) return;
+    inp.value = '';
 
+    openChat();
+
+    // Intro notification
+    const intro = `🔔 *Yangi konsultatsiya*\n\n👤 Mijoz: *${clientName}*\n🕐 ${nowTime()}`;
+    await tgSend(intro);
+
+    // User message
+    addMsg('user', text);
+    const tgText = `💬 *${clientName}*:\n\n${text}`;
+    await tgSend(tgText);
+    showTyping();
+    startPolling();
+}
+
+/* ── quick suggestions ── */
+function quickQ(q) {
+    if (!nameConfirmed) { document.getElementById('client-name').focus(); return; }
+    const inp = document.getElementById('welcome-input');
+    inp.value = q;
+    updateSendBtn();
+    inp.focus();
+}
+
+/* ── send from chat screen ── */
+async function sendMsg() {
+    const inp  = document.getElementById('chat-input');
+    const text = inp.value.trim();
+    if (!text) return;
     inp.value = '';
     inp.style.height = 'auto';
 
     addMsg('user', text);
-
     const tgText = `💬 *${clientName}*:\n\n${text}`;
     await tgSend(tgText);
-
     showTyping();
-    setTimeout(hideTyping, 3500);
 }
 
+/* ── poll for manager replies ── */
 function startPolling() {
-    polling = setInterval(async () => {
+    setInterval(async () => {
         try {
-            const res = await fetch(`${API}/getUpdates?offset=${lastUpdateId + 1}&timeout=1`);
+            const res  = await fetch(`${API}/getUpdates?offset=${lastUpdateId+1}&timeout=1`);
             const data = await res.json();
             if (!data.ok) return;
-
             for (const upd of data.result) {
                 lastUpdateId = upd.update_id;
-
                 if (upd.message) {
-                    const { text = '', chat, from } = upd.message;
-
-                    // Сохраняем chat_id менеджера
+                    const { text='', chat } = upd.message;
                     if (!managerChatId) managerChatId = chat.id;
-
-                    // Проверяем: это не наше сообщение
-                    if (myMsgTexts.has(text)) continue;
-
-                    // Это ответ менеджера — показываем
-                    if (text && !text.startsWith('🔔') && !text.startsWith('💬')) {
+                    if (text && !myTexts.has(text) && !text.startsWith('🔔') && !text.startsWith('💬')) {
                         hideTyping();
                         addMsg('manager', text);
                     }
@@ -432,60 +604,28 @@ function startPolling() {
     }, 2500);
 }
 
-function addMsg(type, text) {
-    const container = document.getElementById('messages');
-    const typing = document.getElementById('typing');
-
-    const wrap = document.createElement('div');
-    wrap.className = `msg msg--${type}`;
-
-    if (type === 'manager') {
-        const name = document.createElement('div');
-        name.className = 'msg__name';
-        name.textContent = 'Менеджер';
-        wrap.appendChild(name);
-    }
-
-    const bubble = document.createElement('div');
-    bubble.className = 'msg__bubble';
-    bubble.textContent = text;
-    wrap.appendChild(bubble);
-
-    const time = document.createElement('div');
-    time.className = 'msg__time';
-    time.textContent = nowTime();
-    wrap.appendChild(time);
-
-    container.insertBefore(wrap, typing);
-    container.scrollTop = container.scrollHeight;
+/* ── send btn active state ── */
+function updateSendBtn() {
+    const val = document.getElementById('welcome-input').value.trim();
+    document.getElementById('welcome-send').classList.toggle('active', val.length > 0);
 }
 
-function showTyping() {
-    const t = document.getElementById('typing');
-    t.style.display = 'flex';
-    document.getElementById('messages').scrollTop = 99999;
-}
-function hideTyping() {
-    document.getElementById('typing').style.display = 'none';
+/* ── textarea auto-resize ── */
+function autoResize(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 160) + 'px';
 }
 
-// Textarea auto-resize + Enter to send
 document.addEventListener('DOMContentLoaded', () => {
-    const ta = document.getElementById('msg-input');
-    if (ta) {
-        ta.addEventListener('input', function() {
-            this.style.height = 'auto';
-            this.style.height = Math.min(this.scrollHeight, 110) + 'px';
-        });
-        ta.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMsg();
-            }
-        });
-    }
-    const ni = document.getElementById('client-name');
-    if (ni) ni.addEventListener('keydown', e => { if (e.key === 'Enter') startChat(); });
+    const wi = document.getElementById('welcome-input');
+    wi.addEventListener('input', () => { autoResize(wi); updateSendBtn(); });
+    wi.addEventListener('keydown', e => { if (e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); sendFirst(); }});
+
+    const ci = document.getElementById('chat-input');
+    ci.addEventListener('input', () => autoResize(ci));
+    ci.addEventListener('keydown', e => { if (e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); sendMsg(); }});
+
+    document.getElementById('client-name').addEventListener('keydown', e => { if(e.key==='Enter') confirmName(); });
 });
 </script>
 </body>
